@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muistilista</h1>
+    
+  <h1> </h1>
+  
+  
+    <h3>Kirjaudu sisään</h3>
+      <h1> </h1>
+  <form>
+    <!-- Tekstikenttä käyttäjätunnukselle -->
+    <div class="form-group">
+      <label>Käyttäjätunnus</label>
+      <input type="text" class="form-control">
+    </div>
+
+    <!-- Salasanakenttä salasanalle -->
+    <div class="form-group">
+      <label>Salasana</label>
+      <input type="password" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+  </form>
+
+{% endblock %}
