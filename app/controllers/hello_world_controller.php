@@ -34,4 +34,7 @@ class HelloWorldController extends BaseController {
     public static function nayta_tehtava() {
         View::make('suunnitelmat/nayta_tehtava.html');
     }
+        public static function lisaa_tehtava() {
+        View::make('suunnitelmat/lisaa_tehtava.html');
+    }
 }

@@ -26,3 +26,7 @@ $routes->get('/nayta_tehtava', function() {
 $routes->get('/rekisteroidy', function() {
     HelloWorldController::rekisteroidy();
 });
+
+$routes->get('/lisaa_tehtava', function() {
+    HelloWorldController::lisaa_tehtava();
+});
