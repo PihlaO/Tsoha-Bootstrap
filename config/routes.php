@@ -34,3 +34,6 @@ $routes->get('/lisaa_tehtava', function() {
 $routes->get('/luokan_muokkaus', function() {
     HelloWorldController::luokan_muokkaus();
 });
+$routes->get('/luokan_lisays', function() {
+    HelloWorldController::luokan_lisays();
+});
