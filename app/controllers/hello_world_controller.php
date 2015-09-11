@@ -44,5 +44,7 @@ class HelloWorldController extends BaseController {
     public static function lisaa_tehtava() {
         View::make('suunnitelmat/lisaa_tehtava.html');
     }
-
+    public static function luokan_muokkaus() {
+        View::make('suunnitelmat/luokan_muokkaus.html');
+    }
 }

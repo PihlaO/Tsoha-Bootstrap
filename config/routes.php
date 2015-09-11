@@ -30,3 +30,7 @@ $routes->get('/rekisteroidy', function() {
 $routes->get('/lisaa_tehtava', function() {
     HelloWorldController::lisaa_tehtava();
 });
+
+$routes->get('/luokan_muokkaus', function() {
+    HelloWorldController::luokan_muokkaus();
+});
