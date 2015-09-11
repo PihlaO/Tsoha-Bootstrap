@@ -1,16 +1,17 @@
+<!DOCTYPE html>
 {% extends "base.html" %}
 {% block content %}
 <h1>Käyttäjän muistilista</h1>
 
 <p>
-    <a href="http://okpiok.users.cs.helsinki.fi/tsoha/lisaa_tehtava" class="btn btn-default btn-sm">Lisää tehtävä</a>
+    <a href="{{base_path}}" class="btn btn-default btn-sm">Lisää tehtävä</a>
 </p>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Tehtävä</th>
-            <th>Luokat</th>
+            <th>Luokkat</th>
             <th>Tärkeysaste</th>
             <th>Ajankohta</th>
             <th>Tila</th>
@@ -20,16 +21,19 @@
     </thead>
 
     <tbody>
+        {% for tehtava in tehtavat %}
         <tr>
-            <td><a href="#">Tehtävä</a></td>
-            <td>Työ</td>
+            <td><a href="#">tehtava.nimi</a></td>
+            <td>Työ</td> 
+            <!Luokka toisesta taulusta. Jatka tästä...>
             <td>Erittäin tärkeä</td>
-            <td>8.9.2015</td>
+            <td>tehtävä.ajankohta</td>
             <td><label class="label label-danger">kesken</label></td>
             <th><a class="btn btn-default btn-sm" href="http://okpiok.users.cs.helsinki.fi/tsoha/muokkaus">Muokkaa</a></th>
             <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>
 
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

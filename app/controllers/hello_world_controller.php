@@ -1,5 +1,6 @@
 <?php
 
+
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -8,11 +9,15 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        // Testaa koodiasi täällä
-        View::make('helloworld.html');
+        $tehtava = Tehtava::find(1);
+        $tehtavat = Tehtava::all();
+        Kint::dump($tehtava);
+        Kint::dump($tehtavat);
+        
+        //  View::make('helloworld.html');
     }
-    
-        public static function rekisteroidy() {
+
+    public static function rekisteroidy() {
         View::make('suunnitelmat/rekisteroidy.html');
     }
 
@@ -31,10 +36,13 @@ class HelloWorldController extends BaseController {
     public static function muokkaus() {
         View::make('suunnitelmat/muokkaus.html');
     }
+
     public static function nayta_tehtava() {
         View::make('suunnitelmat/nayta_tehtava.html');
     }
-        public static function lisaa_tehtava() {
+
+    public static function lisaa_tehtava() {
         View::make('suunnitelmat/lisaa_tehtava.html');
     }
+
 }
