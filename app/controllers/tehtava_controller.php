@@ -6,17 +6,18 @@ class TehtavaController extends BaseController {
 
         $tehtavat = Tehtava::all();
 
-        View::make('tehtava/index.html', array('tehtavat' => $tehtavat));
+        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
     }
 
     public static function show($id) {
         $tehtava = Tehtava::find($id);
-        View::make('tehtava/show.html', array('tehtava' => $tehtava));
+        View::make('tehtava/esittely.html', array('tehtava' => $tehtava));
     }
 
-        public static function create() {
-        View::make('tehtava/new.html');
+    public static function create() {
+        View::make('tehtava/lisays.html');
     }
+
     public static function store() {
 
         $params = $_POST;
@@ -25,17 +26,14 @@ class TehtavaController extends BaseController {
             'otsikko' => $params['otsikko'],
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
-            'ajankohta' => $params['ajankohta'],
-            'tarkeysaste_id' => $params['tarkeysaste_id'],
-            'kayttaja_id' => $params['kayttaja_id'],
-		
+            'ajankohta' => $params['ajankohta']
+            
+
         ));
-       // Kint::dump($params);
-        // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
+        // Kint::dump($params);
         $tehtava->save();
 
         Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
     }
-
 
 }

@@ -1,26 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää tehtävä</h1>
+<h1>Lisää tehtävä</h1>
 
-  <form method="post" action="{{base_path}}/tehtava">
+<form method="post" action="{{base_path}}/tehtava">
     <div class="form-group">
-      <label>Otsikko</label>
-      <input type="text" name="otsikko" class="form-control">
+        <label>Otsikko</label>
+        <input type="text" name="otsikko" class="form-control">
     </div>
 
     <div class="form-group">
-      <label>Kuvaus</label>
-      <input type="text" name="kuvaus" class="form-control">
+        <label>Kuvaus</label>
+        <input type="text" name="kuvaus" class="form-control">
     </div>
 
     <div class="form-group">
-      <label>Ajankohta</label>
-      <input type="text" name="ajankohta" class="form-control">
+        <label>Ajankohta</label>
+        <input type="text" name="ajankohta" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Suorituksen tila</label>
+        <div class="checkbox" >
+            <label>
+                <input type="checkbox" name="suoritettu" value="FALSE">
+                Kesken
+            </label>
+            <label>
+                <input type="checkbox" name="suoritettu" value="TRUE">
+                Valmis
+            </label>
+        </div>
     </div>
 
-      
+
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Lisää</button>
+        <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-  </form>
+</form>
 {% endblock %}

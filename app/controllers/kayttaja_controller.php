@@ -11,7 +11,7 @@ class KayttajaController extends BaseController {
 
     public static function show($id) {
         $kaytttaja = Kayttaja::find($id);
-        View::make('kayttaja/show.html', array('kayttaja' => $kaytttaja));
+        View::make('kayttaja/esittely.html', array('kayttaja' => $kaytttaja));
     }
 
     public static function create() {

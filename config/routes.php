@@ -40,7 +40,7 @@ $routes->get('/luokan_lisays', function() {
 
 //Tehtävä
 
-$routes->get('/tehtava', function() {
+$routes->get('/tehtavien_listaus', function() {
     TehtavaController::index();
 });
 
@@ -49,7 +49,7 @@ $routes->post('/tehtava', function() {
     TehtavaController::store();
 });
 
-$routes->get('/tehtava/new', function() {
+$routes->get('/tehtava/uusi', function() {
     TehtavaController::create();
 });
 

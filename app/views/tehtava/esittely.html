@@ -6,11 +6,8 @@
 <div class="alert alert-success">
   {{message}}
 </div>
-<ul>
 
-    <li>Ajankohta:{{tehtava.ajankohta}}</li> 
-
-
+    <li>Ajankohta:{{tehtava.ajankohta}}</li>  <!Miksi ajankohta ei näy? >
     {% if tehtava.suoritettu %}
     <li>Tila: Valmis</li> 
     {% else %}
@@ -18,7 +15,7 @@
     {% endif %}
 
     <li>Luokat:</li>
-</ul>
+    
 <h4>Kuvaus</h4>
 <p>
     {{tehtava.kuvaus}}
