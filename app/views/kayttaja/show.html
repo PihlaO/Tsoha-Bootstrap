@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Käyttäjätiedot</h1>
+
+<div class="alert alert-success">
+  {{message}}
+</div>
+<ul>
+    <li>Etunimi:{{kayttaja.kayttajatunnus}}</li> 
+    <li>Etunimi:{{kayttaja.etunimi}}</li> 
+    <li>Sukunimi:{{kayttaja.sukunimi}}</li> 
+    <li>Sähköposti:{{kayttaja.sahkoposti}}</li> 
+
+
+
+</ul>
+<p>
+    <a href="{{base_path}}" class="btn btn-default">Muokkaa</a>
+    <button class="btn btn-default">Poista</button> 
+</p>
+
+{% endblock %}

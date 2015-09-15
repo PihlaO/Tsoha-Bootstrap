@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{tehtava.otsikko}}</h1>
+
+<div class="alert alert-success">
+  {{message}}
+</div>
+<ul>
+
+    <li>Ajankohta:{{tehtava.ajankohta}}</li> 
+
+
+    {% if tehtava.suoritettu %}
+    <li>Tila: Valmis</li> 
+    {% else %}
+    <li>Tila: Kesken</li>
+    {% endif %}
+
+    <li>Luokat:</li>
+</ul>
+<h4>Kuvaus</h4>
+<p>
+    {{tehtava.kuvaus}}
+</p>
+<p>
+    <button class="btn btn-default">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+</p>
+
+{% endblock %}

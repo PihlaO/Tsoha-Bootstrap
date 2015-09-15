@@ -37,3 +37,36 @@ $routes->get('/luokan_muokkaus', function() {
 $routes->get('/luokan_lisays', function() {
     HelloWorldController::luokan_lisays();
 });
+
+//Tehtävä
+
+$routes->get('/tehtava', function() {
+    TehtavaController::index();
+});
+
+
+$routes->post('/tehtava', function() {
+    TehtavaController::store();
+});
+
+$routes->get('/tehtava/new', function() {
+    TehtavaController::create();
+});
+
+$routes->get('/tehtava/:id', function($id) {
+    TehtavaController::show($id);
+});
+
+// Käyttäjä
+
+$routes->get('/kayttaja/rekisteroityminen', function() {
+    KayttajaController::create();
+});
+$routes->post('/kayttaja', function() {
+    KayttajaController::store();
+});
+
+$routes->get('/kayttaja/:id', function($id) {
+    KayttajaController::show($id);
+});
+

@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h1>Käyttäjän muistilista</h1>
+
+<p>
+    <a href="{{base_path}}" class="btn btn-default btn-sm">Lisää tehtävä</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tehtävä</th>
+            <th>Luokkat</th>
+            <th>Tärkeysaste</th>
+            <th>Ajankohta</th>
+            <th>Tila</th>
+            <th>Muokkaa</th>
+            <th>Poista</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for tehtava in tehtavat %}
+        <tr>
+            <td><a href="{{base_path}}/tehtava/{{tehtava.id}}">{{tehtava.otsikko}}</td>
+            <td>Luokka</td> <!Luokka toisesta taulusta. >
+    <td>{{tehtava.tarkeysaste_id}}</td> <!Tärkeysaste toisesta taulusta. Tällähetkellä hakee id nro>
+    <td>{{tehtava.ajankohta}}</td>
+    <td>
+        {% if tehtava.suoritettu %}
+        <label class="label label-success">valmis
+            {% else %}
+            <label class="label label-danger">kesken
+                {% endif %}
+                </td>
+                <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus">Muokkaa</a></th>
+                <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+                {% endblock %}
