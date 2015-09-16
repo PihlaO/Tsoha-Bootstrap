@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{luokka.nimi}}</h1>
+
+<div class="alert alert-success">
+  {{message}}
+</div>
+    
+<h4>Kuvaus</h4>
+<p>
+    {{luokka.kuvaus}}
+</p>
+<p>
+    <button class="btn btn-default">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+</p>
+
+{% endblock %}

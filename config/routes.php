@@ -70,3 +70,18 @@ $routes->get('/kayttaja/:id', function($id) {
     KayttajaController::show($id);
 });
 
+// Luokka
+
+$routes->get('/luokkien_listaus', function() {
+    LuokkaController::index();
+});
+$routes->get('/luokka/uusi', function() {
+    LuokkaController::create();
+});
+$routes->post('/luokka', function() {
+    LuokkaController::store();
+});
+
+$routes->get('/luokka/:id', function($id) {
+    LuokkaController::show($id);
+});
