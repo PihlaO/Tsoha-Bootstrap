@@ -12,7 +12,8 @@ Yleisiä linkkejä:
 Linkit sunniteltuihin näkymiin:
 
 * [Etusivu] (http://okpiok.users.cs.helsinki.fi/tsoha/)
-* [Kirjautuminen] (http://okpiok.users.cs.helsinki.fi/tsoha/login) * [Rekisteröityminen] (http://okpiok.users.cs.helsinki.fi/tsoha//kayttaja/rekisteroityminen)
+* [Kirjautuminen] (http://okpiok.users.cs.helsinki.fi/tsoha/login) 
+* [Rekisteröityminen] (http://okpiok.users.cs.helsinki.fi/tsoha//kayttaja/rekisteroityminen)
   
   Tehtävät
 * [Tehtävien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtavien_listaus)
