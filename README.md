@@ -17,7 +17,7 @@ Linkit sunniteltuihin näkymiin:
   
   Tehtävät
 * [Tehtävien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtavien_listaus)
-* [Tehtävän muokkaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/muokkaus)
+* [Tehtävän muokkaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/muokkaus) 
 * [Tehtävän esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/1)
 * [Tehtävän lisäyssivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/uusi)
   
