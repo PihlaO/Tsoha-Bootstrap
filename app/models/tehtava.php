@@ -53,7 +53,6 @@ class Tehtava extends BaseModel {
 
     public function lisaa_luokat($id_array) {
         $tehtava_id = $this->id;
-
         foreach ($id_array as $id) {
             $query = DB::connection()->prepare('INSERT INTO Tehtavaluokka (tehtava_id, luokka_id) VALUES(:tehtava_id, :luokka_id)');
             $query->execute(array('tehtava_id' => $tehtava_id, 'luokka_id' => $id));
@@ -88,12 +87,12 @@ class Tehtava extends BaseModel {
 //    Viikko 4: EI TOIMI VIELÄ
 
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus:kuvaus, suoritettu:suoritettu, ajankohta:ajankohta, tarkeysaste_id=1, kayttaja_id=1) VALUES (:otsikko, , :suoritettu, , 1,  1) WHERE id=id');
-        /// HUOM!! kayttaja_id=1, tarkeysate_id=1 
-        $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta));
 
-//        $row = $query->fetch();
-//        $this->id = $row['id'];
+        // UPDATE Tehtava SET kuvaus = 'uusi kuvaus' WHERE id =14;
+
+        $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus=:kuvaus, suoritettu= :suoritettu, ajankohta= :ajankohta, tarkeysaste_id=1, kayttaja_id=1 WHERE id=:id');
+        /// HUOM!! kayttaja_id=1, tarkeysate_id=1 
+        $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'id' => $this->id));
     }
 
     public function destroy() {

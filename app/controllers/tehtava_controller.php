@@ -11,9 +11,8 @@ class TehtavaController extends BaseController {
 
     public static function show($id) {
         $tehtava = Tehtava::find($id);
-        $luokat = Tehtava::tehtavan_luokkat($id); // kokeilu
-        // View::make('tehtava/esittely.html', array('tehtava' => $tehtava));
-        View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat)); // kokeilu
+        $luokat = Tehtava::tehtavan_luokkat($id);
+        View::make('tehtava/esittely.html',  array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
 
     public static function create() {
@@ -50,22 +49,25 @@ class TehtavaController extends BaseController {
             'otsikko' => $params['otsikko'],
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
-            'ajankohta' => $params['ajankohta']
+            'ajankohta' => $params['ajankohta'],
+            'id' => $id
         );
 
-        Kint::dump($params);
+        //Kint::dump($params);
 
         $tehtava = new Tehtava($attributes);
-        $errors = $tehtava->errors();
+//        $errors = $tehtava->errors();
 
-        if (count($errors) > 0) {
-            View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
-        } else {
-            // Kutsutaan alustetun olion update-metodia, joka päivittää tehtävän tiedot tietokannassa
-            $tehtava->update();
-
-            Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
-        }
+//        if (count($errors) > 0) {
+//            View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+//        } else {
+//            // Kutsutaan alustetun olion update-metodia, joka päivittää tehtävän tiedot tietokannassa
+//            $tehtava->update();
+//
+//            Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
+//        }
+        $tehtava->update();
+        Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
     }
 
     public static function destroy($id) {
