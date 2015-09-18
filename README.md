@@ -24,3 +24,4 @@ Linkit sunniteltuihin näkymiin:
 * [Luokan muokkaussivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokan_muokkaus)
 * [Luokan esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokka/1)
 * [Luokan lisäysssivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokka/uusi)
+
