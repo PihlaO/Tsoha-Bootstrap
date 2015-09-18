@@ -4,24 +4,27 @@
 <h1>{{tehtava.otsikko}}</h1>
 
 <div class="alert alert-success">
-  {{message}}
+    {{message}}
 </div>
 
-    <li>Ajankohta:{{tehtava.ajankohta}}</li>  <!Miksi ajankohta ei näy? >
-    {% if tehtava.suoritettu %}
-    <li>Tila: Valmis</li> 
-    {% else %}
-    <li>Tila: Kesken</li>
-    {% endif %}
+<li>Ajankohta:{{tehtava.ajankohta}}</li>  <!Miksi ajankohta ei näy? >
+{% if tehtava.suoritettu %}
+<li>Tila: Valmis</li> 
+{% else %}
+<li>Tila: Kesken</li>
+{% endif %}
 
-    <li>Luokat:</li>
-    
+<li>Luokat:</li>
+
 <h4>Kuvaus</h4>
 <p>
     {{tehtava.kuvaus}}
 </p>
-<p>
-    <button class="btn btn-default">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
-</p>
+
+<form method="post" action="{{base_path}}/tehtava/{{tehtava.id}}/poisto" style="display: inline-block;">
+    <a href="#" class="btn btn-default">Muokkaa</a> 
+    <a href="#" class="btn btn-default">Poista</a> 
+</form>
+
 
 {% endblock %}

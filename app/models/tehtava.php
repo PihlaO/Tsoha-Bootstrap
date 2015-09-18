@@ -59,4 +59,21 @@ class Tehtava extends BaseModel {
         $this->id = $row['id'];
     }
 
+    
+//    Viikko 4: EI TOIMI VIELÄ
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus:kuvaus, suoritettu:suoritettu, ajankohta:ajankohta, tarkeysaste_id=1, kayttaja_id=1) VALUES (:otsikko, , :suoritettu, , 1,  1) WHERE id=id');
+        /// HUOM!! kayttaja_id=1, tarkeysate_id=1 
+        $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta));
+
+//        $row = $query->fetch();
+//        $this->id = $row['id'];
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Tehtava WHERE id=:id');
+        $query->execute(array('id' => $this->id));
+    }
+
 }

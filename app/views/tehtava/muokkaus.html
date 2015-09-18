@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Tehtävän muokkaus</h1>
+
+<form method="post" action="{{base_path}}/tehtava/:id/muokkaus">
+    <div class="form-group">
+        <label>Otsikko</label>
+        <input type="text" name="otsikko" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <input type="text" name="kuvaus" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Ajankohta</label>
+        <input type="text" name="ajankohta" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Suorituksen tila</label>
+        <div class="checkbox" >
+            <label>
+                <input type="checkbox" name="suoritettu" value="FALSE">
+                Kesken
+            </label>
+            <label>
+                <input type="checkbox" name="suoritettu" value="TRUE">
+                Valmis
+            </label>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <button class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
+{% endblock %}

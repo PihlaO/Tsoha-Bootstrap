@@ -8,11 +8,11 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        // $tehtava = Tehtava::find(1);
-        //$tehtavat = Tehtava::all();
-        //Kint::dump($tehtava);
-        // Kint::dump($tehtavat);
-        //  View::make('helloworld.html');
+         $tehtava = Tehtava::find(1);
+        $tehtavat = Tehtava::all();
+        Kint::dump($tehtava);
+         Kint::dump($tehtavat);
+//          View::make('helloworld.html');
     }
 
     public static function rekisteroidy() {

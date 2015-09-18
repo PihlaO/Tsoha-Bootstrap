@@ -57,6 +57,21 @@ $routes->get('/tehtava/:id', function($id) {
     TehtavaController::show($id);
 });
 
+// Muokkauslomakkeen esittäminen
+$routes->get('/tehtava/:id/muokkaus', function($id) {
+    TehtavaController::edit($id);
+});
+
+// Tehtävän muokkaus 
+$routes->post('/tehtava/:id/muokkaus', function($id) {
+    TehtavaController::update($id);
+});
+
+// Tehtävän poisto
+$routes->post('/tehtava/:id/poisto', function($id) {
+    TehtavaController::destroy($id);
+});
+
 // Käyttäjä
 
 $routes->get('/kayttaja/rekisteroityminen', function() {
@@ -85,3 +100,6 @@ $routes->post('/luokka', function() {
 $routes->get('/luokka/:id', function($id) {
     LuokkaController::show($id);
 });
+
+
+
