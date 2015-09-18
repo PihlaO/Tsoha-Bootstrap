@@ -14,12 +14,12 @@ Linkit sunniteltuihin näkymiin:
 * [Etusivu] (http://okpiok.users.cs.helsinki.fi/tsoha/)
 * [Kirjautuminen] (http://okpiok.users.cs.helsinki.fi/tsoha/login)
 * [Rekisteröityminen] (http://okpiok.users.cs.helsinki.fi/tsoha//kayttaja/rekisteroityminen)
-* 
+ 
 * [Tehtävien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtavien_listaus)
 * [Tehtävän muokkaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/muokkaus)
 * [Tehtävän esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/1)
 * [Tehtävän lisäyssivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/uusi)
-* 
+ 
 * [Luokkien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokkien_listaus)
 * [Luokan muokkaussivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokan_muokkaus)
 * [Luokan esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokka/1)
