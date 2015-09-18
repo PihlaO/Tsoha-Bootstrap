@@ -56,8 +56,7 @@ class Tehtava extends BaseModel {
 
         foreach ($id_array as $id) {
             $query = DB::connection()->prepare('INSERT INTO Tehtavaluokka (tehtava_id, luokka_id) VALUES(:tehtava_id, :luokka_id)');
-            // INSERT INTO TehtavaLuokka (Tehtava_id, Luokka_id) VALUES($tehtava_id, $id)
-            $query->execute(array('tehtava_id' => $tehtava_id, 'luokka_id'=> $id));  
+            $query->execute(array('tehtava_id' => $tehtava_id, 'luokka_id' => $id));
         }
     }
 
