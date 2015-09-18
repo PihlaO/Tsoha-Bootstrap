@@ -47,7 +47,6 @@ $routes->get('/tehtavien_listaus', function() {
 
 $routes->post('/tehtava', function() {
     TehtavaController::store();
-       // LuokkaController::store();
 });
 
 $routes->get('/tehtava/uusi', function() {

@@ -12,12 +12,12 @@ class TehtavaController extends BaseController {
     public static function show($id) {
         $tehtava = Tehtava::find($id);
         $luokat = Tehtava::tehtavan_luokkat($id);
-        View::make('tehtava/esittely.html',  array('tehtava' => $tehtava, 'luokat' => $luokat));
+        View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
 
     public static function create() {
-
-        View::make('tehtava/lisays.html');
+        $luokat = Luokka::all();
+        View::make('tehtava/lisays.html', array('luokat' => $luokat));
     }
 
     public static function store() {
@@ -57,7 +57,6 @@ class TehtavaController extends BaseController {
 
         $tehtava = new Tehtava($attributes);
 //        $errors = $tehtava->errors();
-
 //        if (count($errors) > 0) {
 //            View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
 //        } else {

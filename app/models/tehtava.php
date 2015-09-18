@@ -84,11 +84,7 @@ class Tehtava extends BaseModel {
         $this->id = $row['id'];
     }
 
-//    Viikko 4: EI TOIMI VIELÄ
-
     public function update() {
-
-        // UPDATE Tehtava SET kuvaus = 'uusi kuvaus' WHERE id =14;
 
         $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus=:kuvaus, suoritettu= :suoritettu, ajankohta= :ajankohta, tarkeysaste_id=1, kayttaja_id=1 WHERE id=:id');
         /// HUOM!! kayttaja_id=1, tarkeysate_id=1 

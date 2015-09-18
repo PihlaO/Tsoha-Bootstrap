@@ -7,6 +7,7 @@ class LuokkaController extends BaseController {
         $luokat = Luokka::all();
 
         View::make('luokka/listaus.html', array('luokat' => $luokat));
+                                        
     }
 
     public static function show($id) {
@@ -15,9 +16,12 @@ class LuokkaController extends BaseController {
     }
 
     public static function create() {
-        View::make('luokka/lisays.html');
-    }
+         $luokat = Luokka::all(); //kokeilu
+-        View::make('tehtava/lisays.html', array('luokat' => $luokat));
 
+    /////////////////////    View::make('luokka/lisays.html');
+   
+    }
     public static function store() {
 
         $params = $_POST;
@@ -25,10 +29,10 @@ class LuokkaController extends BaseController {
         $luokka = new Luokka(array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
+            
         ));
         $luokka->save();
 
-        Redirect::to('/luokka/' . $luokka->id, array('message' => 'Luokka on lisätty tehtäväluokkiisi!'));
+        Redirect::to('/luokka/'.$luokka->id, array('message' => 'Luokka on lisätty tehtäväluokkiisi!'));
     }
-
 }
