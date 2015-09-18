@@ -17,7 +17,8 @@ class TehtavaController extends BaseController {
     }
 
     public static function create() {
-        View::make('tehtava/lisays.html');
+        $luokat = Luokka::all(); //kokeilu
+        View::make('tehtava/lisays.html', array('luokat' => $luokat));
     }
 
     public static function store() {
@@ -32,7 +33,8 @@ class TehtavaController extends BaseController {
         ));
         // Kint::dump($params);
         $tehtava->save();
-
+        $tehtava->lisaa_luokat($params['luokat']);
+        
         Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
     }
 

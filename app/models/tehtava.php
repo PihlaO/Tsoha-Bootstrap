@@ -51,6 +51,16 @@ class Tehtava extends BaseModel {
         return null;
     }
 
+    public function lisaa_luokat($id_array) {
+        $tehtava_id = $this->id;
+
+        foreach ($id_array as $id) {
+            $query = DB::connection()->prepare('INSERT INTO Tehtavaluokka (tehtava_id, luokka_id) VALUES(:tehtava_id, :luokka_id)');
+            // INSERT INTO TehtavaLuokka (Tehtava_id, Luokka_id) VALUES($tehtava_id, $id)
+            $query->execute(array('tehtava_id' => $tehtava_id, 'luokka_id'=> $id));  
+        }
+    }
+
     // Etsitään tehtavan id:llä kyseiseen tehtävään liittyvät luokat
     public static function tehtavan_luokkat($id) {
         $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE id IN (SELECT luokka_id FROM Tehtavaluokka WHERE tehtava_id = :id)');
@@ -62,8 +72,8 @@ class Tehtava extends BaseModel {
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
                 'kuvaus' => $row['kuvaus']//,
-                //'Kayttaja_id' => $row['Kayttaja_id']
-                ));
+                    //'Kayttaja_id' => $row['Kayttaja_id']
+            ));
         }
         return $luokat;
     }
