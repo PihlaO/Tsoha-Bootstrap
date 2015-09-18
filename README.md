@@ -20,7 +20,7 @@ Linkit sunniteltuihin näkymiin:
 * [Tehtävän esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/1)
 * [Tehtävän lisäyssivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/uusi)
 
-* [Luokkien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokkien_listaus) 
+* [Luokkien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokkien_listaus)
 * [Luokan muokkaussivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokan_muokkaus)
 * [Luokan esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokka/1)
 * [Luokan lisäysssivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokka/uusi)
