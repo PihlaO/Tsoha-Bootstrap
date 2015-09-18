@@ -29,7 +29,7 @@ class Luokka extends BaseModel {
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE id = :id LIMIT 1');
-         $query->execute(array('id' => $id));
+        $query->execute(array('id' => $id));
         $rivi = $query->fetch();
 
         if ($rivi) {
@@ -45,11 +45,11 @@ class Luokka extends BaseModel {
 
         return null;
     }
-    
-        public function save() {
+
+    public function save() {
         $query = DB::connection()->prepare('INSERT INTO Luokka (nimi, kuvaus, kayttaja_id) VALUES (:nimi, :kuvaus,  1) RETURNING id');
         /// HUOM!! kayttaja_id=1
-        $query->execute(array('nimi' => $this->nimi, 'kuvaus'=> $this->kuvaus));
+        $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus));
         $row = $query->fetch();
         $this->id = $row['id'];
     }

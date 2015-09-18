@@ -51,6 +51,23 @@ class Tehtava extends BaseModel {
         return null;
     }
 
+    // Etsitään tehtavan id:llä kyseiseen tehtävään liittyvät luokat
+    public static function tehtavan_luokkat($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE id IN (SELECT luokka_id FROM Tehtavaluokka WHERE tehtava_id = :id)');
+        $query->execute(array('id' => $id));
+        $rivit = $query->fetchAll();
+        $luokat = array();
+        foreach ($rivit as $row) {
+            $luokat[] = new Luokka(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'kuvaus' => $row['kuvaus']//,
+                //'Kayttaja_id' => $row['Kayttaja_id']
+                ));
+        }
+        return $luokat;
+    }
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Tehtava (otsikko, kuvaus, suoritettu, ajankohta, tarkeysaste_id, kayttaja_id) VALUES (:otsikko, :kuvaus, :suoritettu, :ajankohta, 1,  1) RETURNING id');
         /// HUOM!! kayttaja_id=1, tarkeysate_id=1 
@@ -59,9 +76,8 @@ class Tehtava extends BaseModel {
         $this->id = $row['id'];
     }
 
-    
 //    Viikko 4: EI TOIMI VIELÄ
-    
+
     public function update() {
         $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus:kuvaus, suoritettu:suoritettu, ajankohta:ajankohta, tarkeysaste_id=1, kayttaja_id=1) VALUES (:otsikko, , :suoritettu, , 1,  1) WHERE id=id');
         /// HUOM!! kayttaja_id=1, tarkeysate_id=1 

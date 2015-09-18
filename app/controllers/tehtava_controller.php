@@ -11,7 +11,9 @@ class TehtavaController extends BaseController {
 
     public static function show($id) {
         $tehtava = Tehtava::find($id);
-        View::make('tehtava/esittely.html', array('tehtava' => $tehtava));
+        $luokat = Tehtava::tehtavan_luokkat($id); // kokeilu
+       // View::make('tehtava/esittely.html', array('tehtava' => $tehtava));
+        View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat)); // kokeilu
     }
 
     public static function create() {
@@ -47,7 +49,6 @@ class TehtavaController extends BaseController {
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
             'ajankohta' => $params['ajankohta']
-                
         );
 
         Kint::dump($params);

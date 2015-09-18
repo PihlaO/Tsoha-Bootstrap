@@ -14,7 +14,7 @@
 <li>Tila: Kesken</li>
 {% endif %}
 
-<li>Luokat:</li>
+<li>Luokat: {% for luokka in luokat %}  <a href="{{base_path}}/luokka/{{luokka.id}}" class="btn btn-link" role="button">{{luokka.nimi}}</a> {% endfor %} </li> 
 
 <h4>Kuvaus</h4>
 <p>
