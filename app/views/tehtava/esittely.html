@@ -20,10 +20,10 @@
 <p>
     {{tehtava.kuvaus}}
 </p>
+    <a href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
 
 <form method="post" action="{{base_path}}/tehtava/{{tehtava.id}}/poisto" style="display: inline-block;">
-    <a href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
-    <a href="#" class="btn btn-default">Poista</a> 
+    <button  class="btn btn-default">Poista</button> 
 </form>
 
 

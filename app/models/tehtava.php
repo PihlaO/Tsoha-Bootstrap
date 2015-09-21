@@ -91,7 +91,9 @@ class Tehtava extends BaseModel {
         $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'id' => $this->id));
     }
 
-    public function destroy() {
+    public function destroy() { // Miten tehtavaluokasta pois tehtava???
+        $query = DB::connection()->prepare('DELETE FROM Tehtavaluokka WHERE tehtava_id=:id');
+        $query->execute(array('id' => $this->id));
         $query = DB::connection()->prepare('DELETE FROM Tehtava WHERE id=:id');
         $query->execute(array('id' => $this->id));
     }

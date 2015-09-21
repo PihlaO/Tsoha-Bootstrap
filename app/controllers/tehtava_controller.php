@@ -72,10 +72,8 @@ class TehtavaController extends BaseController {
     public static function destroy($id) {
 
         $tehtava = new Tehtava(array('id' => $id));
-
         $tehtava->destroy();
-
-        Redirect::to('/tehtavien_listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!'));
+        Redirect::to('/tehtavien_listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!')); // viesti ei tule näkyviin!
     }
 
 }
