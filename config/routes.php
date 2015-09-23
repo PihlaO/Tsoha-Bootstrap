@@ -1,9 +1,10 @@
 <?php
 
-$routes->get('/', function() {
+///ETUSIVU/muistilista
+$routes->get('/', function() {   
     HelloWorldController::etusivu();
 });
-
+///
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
@@ -12,9 +13,9 @@ $routes->get('/tehtavat_list', function() {
     HelloWorldController::tehtavat_list();
 });
 
-$routes->get('/login', function() {
-    HelloWorldController::login();
-});
+//$routes->get('/login', function() {
+//    HelloWorldController::login();
+//});
 
 $routes->get('/muokkaus', function() {
     HelloWorldController::muokkaus();
@@ -43,6 +44,13 @@ $routes->get('/luokan_lisays', function() {
 $routes->get('/tehtavien_listaus', function() {
     TehtavaController::index();
 });
+
+
+// kokeilu // kokeilu // kokeilu // kokeilu // kokeilu
+$routes->get('/tehtavien_listaus/:kayttaja_id', function($kayttaja_id) {
+    TehtavaController::kayttaja_index($kayttaja_id);
+});
+
 
 
 $routes->post('/tehtava', function() {
@@ -74,17 +82,28 @@ $routes->post('/tehtava/:id/poisto', function($id) {
 
 // Käyttäjä
 
+$routes->get('/login', function(){
+  // Kirjautumislomakkeen esittäminen
+  KayttajaController::login();
+});
+$routes->post('/login', function(){
+  // Kirjautumisen käsittely
+  KayttajaController::handle_login();
+});
+
+$routes->post('/logout', function(){
+  KayttajaController::logout();
+});
+
 $routes->get('/kayttaja/rekisteroityminen', function() {
     KayttajaController::create();
 });
 $routes->post('/kayttaja', function() {
     KayttajaController::store();
 });
-
 $routes->get('/kayttaja/:id', function($id) {
     KayttajaController::show($id);
 });
-
 // Luokka
 
 $routes->get('/luokkien_listaus', function() {

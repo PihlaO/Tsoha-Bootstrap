@@ -6,40 +6,68 @@ class TehtavaController extends BaseController {
 
         $tehtavat = Tehtava::all();
 
+
+        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
+    }
+
+    public static function kayttaja_index() { //ei ei vielä käytössä, testaa toimiiko!!!
+        $kayttaja = TehtavaController::get_user_logged_in();
+        $kayttaja_id = $kayttaja->id;
+        $tehtavat = Tehtava::kayttaja_all($kayttaja_id);
         View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
     }
 
     public static function show($id) {
         $tehtava = Tehtava::find($id);
-        $luokat = Tehtava::tehtavan_luokkat($id);
+        $luokat = Tehtava::tehtavan_luokat($id);
+
         View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
 
     public static function create() {
         $luokat = Luokka::all();
-        View::make('tehtava/lisays.html', array('luokat' => $luokat));
+        $tarkeysasteet = Tarkeysaste::all();
+        //Kint::dump($tarkeysasteet);
+        View::make('tehtava/lisays.html', array('luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
 
     public static function store() {
 
         $params = $_POST;
-
-        $tehtava = new Tehtava(array(
+        $attributes = array(
             'otsikko' => $params['otsikko'],
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
-            'ajankohta' => $params['ajankohta']
-        ));
-        // Kint::dump($params);
-        $tehtava->save();
-        $tehtava->lisaa_luokat($params['luokat']);
+            'ajankohta' => $params['ajankohta'],
+            'tarkeysaste' => $params['tarkeysaste']
+        );
+        $tehtava = new Tehtava($attributes);
 
-        Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
+        $errors = $tehtava->errors();
+        $tarkeysasteet = Tarkeysaste::all();
+        $luokat = Luokka::all();
+
+
+
+        if (count($errors) == 0) {
+            $tehtava->save();
+
+            if (!(empty($params['luokat']))) {
+                $tehtava->lisaa_luokat($params['luokat']);
+            }
+
+
+            Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
+        } else {
+            View::make('tehtava/lisays.html', array('errors' => $errors, 'attributes' => $attributes, 'tarkeysasteet' => $tarkeysasteet, 'luokat' => $luokat));
+        }
     }
 
     public static function edit($id) {
+        $luokat = Luokka::all();
+        $tarkeysasteet = Tarkeysaste::all();
         $tehtava = Tehtava::find($id);
-        View::make('tehtava/muokkaus.html', array('attributes' => $tehtava));
+        View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
 
     public static function update($id) {
@@ -50,23 +78,38 @@ class TehtavaController extends BaseController {
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
             'ajankohta' => $params['ajankohta'],
+            'tarkeysaste' => $params['tarkeysaste'],
             'id' => $id
         );
 
-        //Kint::dump($params);
+//Kint::dump($params);
 
         $tehtava = new Tehtava($attributes);
-//        $errors = $tehtava->errors();
-//        if (count($errors) > 0) {
-//            View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
-//        } else {
-//            // Kutsutaan alustetun olion update-metodia, joka päivittää tehtävän tiedot tietokannassa
-//            $tehtava->update();
-//
-//            Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
+
+        $errors = $tehtava->errors();
+        if (count($errors) > 0) {
+            $luokat = Luokka::all();
+            $tarkeysasteet = Tarkeysaste::all();
+            View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
+        } else {
+            // Kutsutaan alustetun olion update-metodia, joka päivittää tehtävän tiedot tietokannassa
+            $tehtava->update();
+
+            $tehtava->destroy_tehtava_tehtavaluokasta();
+            if (!(empty($params['luokat']))) { //tee metodi
+                $tehtava->lisaa_luokat($params['luokat']);
+            }
+
+            Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
+        }
+
+//        $tehtava->update();
+//        $tehtava->destroy_tehtava_tehtavaluokasta();
+//        if (!(empty($params['luokat']))) { //tee metodi
+//            $tehtava->lisaa_luokat($params['luokat']);
 //        }
-        $tehtava->update();
-        Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
+//
+//        Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
     }
 
     public static function destroy($id) {

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
 
 <h1>{{tehtava.otsikko}}</h1>
@@ -14,17 +15,24 @@
 <li>Tila: Kesken</li>
 {% endif %}
 
-<li>Luokat: {% for luokka in luokat %}  <a href="{{base_path}}/luokka/{{luokka.id}}" class="btn btn-link" role="button">{{luokka.nimi}}</a> {% endfor %} </li> 
+
+<li>Tärkeysaste: {{tehtava.tarkeysaste}}</li> 
+
+
+<li>Luokat: 
+    {% for luokka in luokat %}  
+    <a href="{{base_path}}/luokka/{{luokka.id}}" class="btn btn-link" role="button">{{luokka.nimi}}</a> 
+    {% endfor %} 
+</li> 
 
 <h4>Kuvaus</h4>
 <p>
     {{tehtava.kuvaus}}
 </p>
-    <a href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
+<a href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus" class="btn btn-default">Muokkaa</a>  <!tee tästä myös makro>
 
-<form method="post" action="{{base_path}}/tehtava/{{tehtava.id}}/poisto" style="display: inline-block;">
-    <button  class="btn btn-default">Poista</button> 
-</form>
+
+{{forms.poistopainike("#{base_path}/tehtava/#{tehtava.id}/poisto")}}
 
 
 {% endblock %}

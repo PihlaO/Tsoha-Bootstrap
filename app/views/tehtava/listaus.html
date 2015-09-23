@@ -1,15 +1,21 @@
 
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
-<h1>Käyttäjän muistilista</h1>
 
-<p>
-    <a href="{{base_path}}/tehtava/uusi" class="btn btn-default btn-sm">Lisää tehtävä</a>
-</p>
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.etunimi}} muistilista</h1>
+{% else %}
+<h1> Käyttäjän muistilista </h1>
+{% endif %}
+
+<div class="alert alert-success">
+    {{message}}
+</div>
+<p><a href="{{base_path}}/tehtava/uusi" class="btn btn-default btn-sm">Lisää tehtävä</a></p>
 
 <table class="table table-striped">
-    <thead>
-        <tr>
+    <thead><tr>
             <th>Tehtävä</th>
             <th>Tärkeysaste</th>
             <th>Ajankohta</th>
@@ -18,26 +24,30 @@
             <th>Poista</th>
         </tr>
     </thead>
-
     <tbody>
+
         {% for tehtava in tehtavat %}
         <tr>
             <td><a href="{{base_path}}/tehtava/{{tehtava.id}}">{{tehtava.otsikko}}</td>
-            
-            
-    <td>{{tehtava.tarkeysaste_id}}</td> <!Tärkeysaste toisesta taulusta. Tällähetkellä hakee id nro>
-    <td>{{tehtava.ajankohta}}</td>
-    <td>
-        {% if tehtava.suoritettu %}
-        <label class="label label-success">valmis
-            {% else %}
-            <label class="label label-danger">kesken
-                {% endif %}
-                </td>
-                <th><a class="btn btn-default btn-sm" href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus">Muokkaa</a></th>
-                <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>
-                </tr>
-                {% endfor %}
-                </tbody>
-                </table>
-                {% endblock %}
+
+
+            <td>{{tehtava.tarkeysaste}}</td> 
+
+            <td>{{tehtava.ajankohta}}</td>
+
+            <td>
+                {% if tehtava.suoritettu %}
+                <label class="label label-success">valmis
+                    {% else %}
+                    <label class="label label-danger">kesken
+                        {% endif %}
+                        </td>
+                        <th><a class="btn btn-default btn-sm" href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus">Muokkaa</a></th>
+                        <th>
+                            {{forms.poistopainike("#{base_path}/tehtava/#{tehtava.id}/poisto")}}
+                        </th>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        {% endblock %}

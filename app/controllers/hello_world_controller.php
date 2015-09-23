@@ -8,10 +8,19 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-         $tehtava = Tehtava::find(1);
-        $tehtavat = Tehtava::all();
-        Kint::dump($tehtava);
-         Kint::dump($tehtavat);
+        $doom = new Tehtava(array(
+            'otsikko'=>'otsikko',
+            'ajankohta'=>'22.05.2015',
+            
+            'suoritettu' => ''
+        ));
+        $errors = $doom->errors();
+
+        Kint::dump($errors);
+//         $tehtava = Tehtava::find(1);
+//        $tehtavat = Tehtava::all();
+//        Kint::dump($tehtava);
+//         Kint::dump($tehtavat);
 //          View::make('helloworld.html');
     }
 
@@ -19,9 +28,9 @@ class HelloWorldController extends BaseController {
         View::make('suunnitelmat/rekisteroidy.html');
     }
 
-    public static function login() {
-        View::make('suunnitelmat/login.html');
-    }
+//    public static function login() {
+//        View::make('suunnitelmat/login.html');
+//    }
 
     public static function tehtavat_list() {
         View::make('suunnitelmat/tehtavat_list.html');

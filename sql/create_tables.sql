@@ -26,12 +26,11 @@ CREATE TABLE Tehtava(
 id SERIAL PRIMARY KEY NOT NULL,
 otsikko VARCHAR(200) NOT NULL,
 kuvaus VARCHAR(2000),
-suoritettu BOOLEAN DEFAULT FALSE NOT NULL,
+suoritettu BOOLEAN DEFAULT FALSE,
 ajankohta TIMESTAMP,
-tarkeysaste_id INTEGER, 
+tarkeysaste VARCHAR(50), 
 kayttaja_id INTEGER NOT NULL,
-CONSTRAINT fk_kayttaja_id FOREIGN KEY(kayttaja_id) REFERENCES Kayttaja(id),
-CONSTRAINT fk_tarkeysaste_id FOREIGN KEY(tarkeysaste_id) REFERENCES Tarkeysaste(id)
+CONSTRAINT fk_kayttaja_id FOREIGN KEY(kayttaja_id) REFERENCES Kayttaja(id)
 ); 
 
 CREATE TABLE Tehtavaluokka(

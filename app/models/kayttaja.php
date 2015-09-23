@@ -49,6 +49,26 @@ class Kayttaja extends BaseModel {
         return null;
     }
 
+    public static function authenticate($kayttajatunnus, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1;');
+        $query->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
+        $rivi = $query->fetch();
+        if ($rivi) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana'],
+                'etunimi' => $rivi['etunimi'],
+                'sukunimi' => $rivi['sukunimi'],
+                'sahkoposti' => $rivi['sahkoposti']
+            ));
+
+            return $kayttaja;
+        } else {
+            return null;
+        }
+    }
+
     public function save() {
 
         $query = DB::connection()->prepare('INSERT INTO Kayttaja (kayttajatunnus, salasana, etunimi, sukunimi, sahkoposti) VALUES (:kayttajatunnus, :salasana, :etunimi, :sukunimi, :sahkoposti) RETURNING id');

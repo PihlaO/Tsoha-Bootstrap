@@ -1,0 +1,9 @@
+
+{% macro poistopainike(action, text) %}
+
+<form method="post" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-default">{{text|default('Poista')}}</button>
+</form>
+
+{% endmacro %}
+

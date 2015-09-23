@@ -2,24 +2,44 @@
 {% block content %}
 <h1>Lisää tehtävä</h1>
 
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 <form method="post" action="{{base_path}}/tehtava">
     <div class="form-group">
         <label>Otsikko</label>
-        <input type="text" name="otsikko" class="form-control">
+        <input type="text" name="otsikko" class="form-control" value="{{attributes.otsikko}}">
     </div>
 
     <div class="form-group">
         <label>Kuvaus</label>
-        <input type="text" name="kuvaus" class="form-control">
+        <input type="text" name="kuvaus" class="form-control" value="{{attributes.kuvaus}}">
     </div>
 
     <div class="form-group">
         <label>Ajankohta</label>
-        <input type="text" name="ajankohta" class="form-control">
+        <input type="text" name="ajankohta" class="form-control" value="{{attributes.ajankohta}}">
+    </div>
+    <div class="form-group">
+
+        <label>Tärkeysaste</label> 
+        <select class="form-control" name="tarkeysaste">
+            {% for tarkeysaste in tarkeysasteet %}
+            <option value="{{tarkeysaste.nimi}}">{{tarkeysaste.nimi}}</option>
+            {% endfor %}
+        </select>
     </div>
 
     <div class="form-group">
-        <label>Luokat</label>
+        <label>Luokat</label>  <small class=text-muted"><p > Voit valita monta luokkaa painamalla <kbd><kbd>ctrl</kbd></kbd> valinnan yhteydessä.</p></small> 
         <select class="form-control" name="luokat[]" multiple="">
             {% for luokka in luokat %}
             <option value="{{luokka.id}}">{{luokka.nimi}}</option>
@@ -28,17 +48,11 @@
     </div>
 
     <div class="form-group">
-        <label>Suorituksen tila</label>
-        <div class="checkbox" >
-            <label>
-                <input type="checkbox" name="suoritettu" value="FALSE">
-                Kesken
-            </label>
-            <label>
-                <input type="checkbox" name="suoritettu" value="TRUE">
-                Valmis
-            </label>
-        </div>
+        <label>Suorituksen tila</label> 
+        <select class="form-control" name="suoritettu">
+            <option value="FALSE">Kesken</option>
+            <option value="TRUE">Valmis</option>
+        </select>
     </div>
 
 

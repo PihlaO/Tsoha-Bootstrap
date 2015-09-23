@@ -3,35 +3,34 @@
 {% block content %}
 
 <h1 class="text-center"> Muistilista</h1>
-
 <h1> </h1>
 <h1> </h1>
 <h1> </h1>
 
-<h3>Kirjaudu sisään</h3>
+{% if user_logged_in %}
+<h4>Tervetuloa {{user_logged_in.etunimi}}!</h4>
+{% endif %}
+
+
+
+{% if user_logged_in==FALSE %}
 <h1> </h1>
-<form>
-
-    <div class="form-group">
-        <label>Käyttäjätunnus</label>
-        <input type="text" class="form-control">
-    </div>
-
-
-    <div class="form-group">
-        <label>Salasana</label>
-        <input type="password" class="form-control">
-    </div>
-
-
-    <button type="submit" class="btn btn-primary"  >Kirjaudu sisään </button>
-
-</form>
 <h1> </h1>
+<h1> </h1>
+<h4 class="text-center"><strong>Tervetuloa Muistilista-sovellukseen!</strong></h4> 
 
-
-<p>
+<h1>  </h1>
+<h1>  </h1>
+<h1>  </h1>
+<h1>   </h1>
+<h1>   </h1>
+<h1> </h1>
+<p class="text-center">
+<a href="{{base_path}}/login" class="btn btn-primary" role="button">Kirjaudu sisään</a>
+</p>
+<p class="text-center">
     <strong>Uusi käyttäjä?</strong> <a href="{{base_path}}/kayttaja/rekisteroityminen" class="btn btn-link" role="button">Rekisteröidy tästä.</a>
 </p>
 
+{% endif %}
 {% endblock %}
