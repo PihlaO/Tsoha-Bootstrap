@@ -8,6 +8,9 @@ VALUES('Testi', 'abc123', 'Testaaja', 'Testaus', 'abc@sähköposti.fi');
 INSERT INTO Kayttaja (kayttajatunnus, salasana, etunimi, sukunimi, sahkoposti) 
 VALUES ('Testi2', 'asd123','Testaaja2', 'Testaus2', 'abc2@sähköposti.fi');
 
+INSERT INTO Kayttaja (kayttajatunnus, salasana, etunimi, sukunimi, sahkoposti) 
+VALUES ('Testi3', 'asd123','Testaaja3', 'Testaus3', 'abc2@posti.fi');
+
 --TÄRKEYSASTE
 
 INSERT INTO Tarkeysaste(nimi) VALUES('Normaali');
@@ -20,6 +23,8 @@ INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
 VALUES('Tsoha', 'Palauta harjoitustyo','Erittäin tärkeä',  '18-10-2015 23:59', 1);
 INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
 VALUES('Ohjaus', 'Kurssin ohjaaminen', 'Tärkeä','18-10-2015 23:59', 1);
+INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
+VALUES('Testi', 'Testi tehtävä', 'Tärkeä','18-10-2015 23:59', 2);
 
 
 --LUOKKA
@@ -35,3 +40,4 @@ INSERT INTO Tehtavaluokka(tehtava_id, luokka_id) VALUES(1,1);
 
 INSERT INTO Tehtavaluokka(tehtava_id, luokka_id) VALUES(1,2);
 
+INSERT INTO Tehtavaluokka(tehtava_id, luokka_id) VALUES(2,3);

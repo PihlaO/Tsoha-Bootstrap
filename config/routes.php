@@ -41,14 +41,14 @@ $routes->get('/luokan_lisays', function() {
 
 //Tehtävä
 
-$routes->get('/tehtavien_listaus', function() {
-    TehtavaController::index();
-});
+//$routes->get('/tehtavien_listaus', function() {
+//    TehtavaController::index();
+//});
 
 
 // kokeilu // TOIMIII
-$routes->get('/tehtavien_listaus/:kayttaja_id', function($kayttaja_id) {
-    TehtavaController::kayttaja_index($kayttaja_id);
+$routes->get('/tehtavien_listaus', function() {
+    TehtavaController::index();
 });
 
 

@@ -3,6 +3,12 @@
 
 <h1>Kirjaudu sisään</h1>
 
+
+<div class="alert alert-danger">
+        {{error}}
+</div>
+
+
 <div class="alert alert-success">
     {{message}}
 </div>
@@ -10,7 +16,7 @@
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <label>Käyttäjätunnus</label> 
-        <input type="text" name="kayttajatunnus" class="form-control" value="{{attributes.kayttajatunnus}}">
+        <input type="text" name="kayttajatunnus" class="form-control" value="{{kayttajatunnus}}"> 
     </div>
 
 

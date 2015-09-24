@@ -2,18 +2,17 @@
 
 class TehtavaController extends BaseController {
 
-    public static function index() {
+//    public static function index() {
+//
+//        $tehtavat = Tehtava::all();
+//
+//
+//        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
+//    }
 
-        $tehtavat = Tehtava::all();
-
-
-        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
-    }
-
-    public static function kayttaja_index() { //ei ei vielä käytössä, testaa toimiiko!!!
-        $kayttaja = TehtavaController::get_user_logged_in();
-        $kayttaja_id = $kayttaja->id;
-        $tehtavat = Tehtava::kayttaja_all($kayttaja_id);
+    public static function index() { //testaa toimiiko!!!
+        $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
+        $tehtavat = Tehtava::all($kayttaja_id);
         View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
     }
 
@@ -39,7 +38,8 @@ class TehtavaController extends BaseController {
             'kuvaus' => $params['kuvaus'],
             'suoritettu' => $params['suoritettu'],
             'ajankohta' => $params['ajankohta'],
-            'tarkeysaste' => $params['tarkeysaste']
+            'tarkeysaste' => $params['tarkeysaste'],
+            'kayttaja_id' => self::get_user_logged_in()->get_kauttaja_id()
         );
         $tehtava = new Tehtava($attributes);
 

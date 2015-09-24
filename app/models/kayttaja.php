@@ -6,6 +6,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validoi_kayttajatunnus');
     }
 
     public static function all() {
@@ -26,6 +27,12 @@ class Kayttaja extends BaseModel {
         }
 
         return $kayttajat;
+    }
+
+    public static function get_kauttaja_id() {
+        $kayttaja = TehtavaController::get_user_logged_in();
+        $kayttaja_id = $kayttaja->id;
+        return $kayttaja_id;
     }
 
     public static function find($id) {
@@ -75,6 +82,21 @@ class Kayttaja extends BaseModel {
         $query->execute(array('kayttajatunnus' => $this->kayttajatunnus, 'salasana' => $this->salasana, 'etunimi' => $this->etunimi, 'sukunimi' => $this->sukunimi, 'sahkoposti' => $this->sahkoposti));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+    
+        public function validoi_kayttajatunnus() {
+        $errors = array();
+        if ($this->kayttajatunnus == '' || $this->kayttajatunnus== null) {
+            $errors[] = 'Käyttäjätunnus ei saa olla tyhjä!';
+        }
+        if (strlen($this->kayttajatunnus) < 2) {
+            $errors[] = 'Käyttäjätunnuksen pituuden tulee olla vähintään kaksi merkkiä!';
+        }
+        if (strlen($this->kayttajatunnus) > 20) {
+            $errors[] = 'Käyttäjätunnus saa olla enintään 20 merkkiä!';
+        }
+
+        return $errors;
     }
 
 }

@@ -16,7 +16,7 @@ class KayttajaController extends BaseController {
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
 
-            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->etunimi . '!'));
+            Redirect::to('/', array('message' => 'Tervetuloa ' . $kayttaja->etunimi . '!'));
         }
     }
 
@@ -45,17 +45,24 @@ class KayttajaController extends BaseController {
 
         $params = $_POST;
 
-        $kayttaja = new Kayttaja(array(
+        $attributes = array(
             'etunimi' => $params['etunimi'],
             'sukunimi' => $params['sukunimi'],
             'kayttajatunnus' => $params['kayttajatunnus'],
             'salasana' => $params['salasana'],
             'sahkoposti' => $params['sahkoposti']
-        ));
+        );
 
-        $kayttaja->save();
+        $kayttaja = new Kayttaja($attributes);
+        $errors = $kayttaja->errors();
+        if (count($errors) == 0) {
+            $kayttaja->save();
 
-        Redirect::to('/kayttaja/' . $kayttaja->id, array('message' => 'Rekisteröityminen onnistui'));
+
+            Redirect::to('/kayttaja/' . $kayttaja->id, array('message' => 'Rekisteröityminen onnistui'));
+        } else {
+            View::make('kayttaja/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
 }

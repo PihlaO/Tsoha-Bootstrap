@@ -7,8 +7,14 @@
 <h1> </h1>
 <h1> </h1>
 
+
+
 {% if user_logged_in %}
-<h4>Tervetuloa {{user_logged_in.etunimi}}!</h4>
+
+<div class="alert alert-success">
+    {{message}}
+</div>
+
 {% endif %}
 
 

@@ -9,29 +9,29 @@ class Tehtava extends BaseModel {
         $this->validators = array('validoi_otsikko', 'validoi_ajankohta');
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Tehtava');
-        $query->execute();
-
-        $rivit = $query->fetchAll();
-        $tehtavat = array();
-
-        foreach ($rivit as $rivi) {
-            $tehtavat[] = new Tehtava(array(
-                'id' => $rivi['id'],
-                'otsikko' => $rivi['otsikko'],
-                'kuvaus' => $rivi['kuvaus'],
-                'suoritettu' => $rivi['suoritettu'],
-                'ajankohta' => $rivi['ajankohta'],
-                'tarkeysaste' => $rivi['tarkeysaste'],
-                'kayttaja_id' => $rivi['kayttaja_id']
-            ));
-        }
-
-        return $tehtavat;
-    }
+//    public static function all() {
+//        $query = DB::connection()->prepare('SELECT * FROM Tehtava');
+//        $query->execute();
+//
+//        $rivit = $query->fetchAll();
+//        $tehtavat = array();
+//
+//        foreach ($rivit as $rivi) {
+//            $tehtavat[] = new Tehtava(array(
+//                'id' => $rivi['id'],
+//                'otsikko' => $rivi['otsikko'],
+//                'kuvaus' => $rivi['kuvaus'],
+//                'suoritettu' => $rivi['suoritettu'],
+//                'ajankohta' => $rivi['ajankohta'],
+//                'tarkeysaste' => $rivi['tarkeysaste'],
+//                'kayttaja_id' => $rivi['kayttaja_id']
+//            ));
+//        }
+//
+//        return $tehtavat;
+//    }
     
-        public static function kayttaja_all($kayttaja_id) {
+        public static function all($kayttaja_id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava  WHERE kayttaja_id=:kayttaja_id');
         $query->execute(array('kayttaja_id' => $kayttaja_id));
 
@@ -101,19 +101,20 @@ class Tehtava extends BaseModel {
         return $luokat;
     }
 
-    //  MUOKKAA TALLENTAMAAN KÄYTTÄJÄ_ID !!!!
+  
     
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Tehtava (otsikko, kuvaus, suoritettu, ajankohta, tarkeysaste, kayttaja_id) VALUES (:otsikko, :kuvaus, :suoritettu, :ajankohta, :tarkeysaste,  1) RETURNING id');
-        /// HUOM!! kayttaja_id=1
-        $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'tarkeysaste' => $this->tarkeysaste));
+  
+        $query = DB::connection()->prepare('INSERT INTO Tehtava (otsikko, kuvaus, suoritettu, ajankohta, tarkeysaste, kayttaja_id) VALUES (:otsikko, :kuvaus, :suoritettu, :ajankohta, :tarkeysaste,  :kayttaja_id) RETURNING id');
+
+        $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'tarkeysaste' => $this->tarkeysaste, 'kayttaja_id'=>  $this->kayttaja_id));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus=:kuvaus, suoritettu= :suoritettu, ajankohta= :ajankohta, tarkeysaste= :tarkeysaste, kayttaja_id=1 WHERE id=:id');
+        $query = DB::connection()->prepare('UPDATE Tehtava SET otsikko = :otsikko, kuvaus=:kuvaus, suoritettu= :suoritettu, ajankohta= :ajankohta, tarkeysaste= :tarkeysaste WHERE id=:id');
         /// HUOM!! kayttaja_id=1
         $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'tarkeysaste' => $this->tarkeysaste, 'id' => $this->id));
     }
