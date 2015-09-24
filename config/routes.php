@@ -46,7 +46,7 @@ $routes->get('/tehtavien_listaus', function() {
 });
 
 
-// kokeilu // kokeilu // kokeilu // kokeilu // kokeilu
+// kokeilu // TOIMIII
 $routes->get('/tehtavien_listaus/:kayttaja_id', function($kayttaja_id) {
     TehtavaController::kayttaja_index($kayttaja_id);
 });

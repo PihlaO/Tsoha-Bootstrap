@@ -101,6 +101,8 @@ class Tehtava extends BaseModel {
         return $luokat;
     }
 
+    //  MUOKKAA TALLENTAMAAN KÄYTTÄJÄ_ID !!!!
+    
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Tehtava (otsikko, kuvaus, suoritettu, ajankohta, tarkeysaste, kayttaja_id) VALUES (:otsikko, :kuvaus, :suoritettu, :ajankohta, :tarkeysaste,  1) RETURNING id');
         /// HUOM!! kayttaja_id=1
