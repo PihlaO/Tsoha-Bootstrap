@@ -1,11 +1,11 @@
 # Tietokantasovelluksen esittelysivu
 
-Yleisiä linkkejä:
+## Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://okpiok.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://github.com/PihlaO/Tsoha-Bootstrap/blob/master/doc/Dokumentaatio.pdf)
 
-### Kirjautuminen 
+## Kirjautuminen 
 
 * Käyttäjätunnus: Testi
 * Salasana: abc123
