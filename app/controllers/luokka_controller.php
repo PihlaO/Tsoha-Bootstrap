@@ -16,7 +16,7 @@ class LuokkaController extends BaseController {
 
     public static function create() {
         $luokat = Luokka::all(); //kokeilu
-        View::make('tehtava/lisays.html', array('luokat' => $luokat));
+        View::make('luokka/lisays.html', array('luokat' => $luokat));
 
         /////////////////////    View::make('luokka/lisays.html');
     }
