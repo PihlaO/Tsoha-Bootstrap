@@ -4,6 +4,7 @@
 
 * [Linkki sovellukseeni](http://okpiok.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://github.com/PihlaO/Tsoha-Bootstrap/blob/master/doc/Dokumentaatio.pdf)
+* [Linkki aihekuvaukseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
 ## Kirjautuminen 
 
@@ -12,7 +13,6 @@
 
 ## Muistilista
 
-[Linkki aihekuvaukseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
 Linkit sunniteltuihin näkymiin:
 
