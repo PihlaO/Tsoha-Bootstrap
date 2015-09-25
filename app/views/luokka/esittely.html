@@ -1,18 +1,21 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
 
 <h1>{{luokka.nimi}}</h1>
 
 <div class="alert alert-success">
-  {{message}}
+    {{message}}
 </div>
-    
+
 <h4>Kuvaus</h4>
 <p>
     {{luokka.kuvaus}}
 </p>
-<p>
-    <button class="btn btn-default">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
-</p>
+
+    <a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
+    {{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}
+
+
 
 {% endblock %}

@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
 
 <h1>Tehtäväluokat</h1>
 
+<div class="alert alert-success">
+    {{message}}
+</div>
 <p>
     <a href="{{base_path}}/luokka/uusi" class="btn btn-default btn-sm">Lisää luokka</a>
 </p>
@@ -24,8 +28,8 @@
 
             <td>{{luokka.kuvaus}}</td> 
 
-                        <th><a class="btn btn-default btn-sm" href="{{base_path}}/">Muokkaa</a></th>
-                        <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>
+                        <th>    <a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> </th>
+                        <th>{{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}</th>
                         </tr>
                         {% endfor %}
                         </tbody>

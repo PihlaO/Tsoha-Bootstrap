@@ -1,7 +1,7 @@
 <?php
 
 ///ETUSIVU/muistilista
-$routes->get('/', function() {   
+$routes->get('/', function() {
     HelloWorldController::etusivu();
 });
 ///
@@ -40,12 +40,9 @@ $routes->get('/luokan_lisays', function() {
 });
 
 //Tehtävä
-
 //$routes->get('/tehtavien_listaus', function() {
 //    TehtavaController::index();
 //});
-
-
 // kokeilu // TOIMIII
 $routes->get('/tehtavien_listaus', function() {
     TehtavaController::index();
@@ -80,19 +77,54 @@ $routes->post('/tehtava/:id/poisto', function($id) {
     TehtavaController::destroy($id);
 });
 
+
+// Luokka
+
+$routes->post('/luokka', function() {
+    LuokkaController::store();
+});
+
+$routes->get('/luokka/uusi', function() {
+    LuokkaController::create();
+});
+
+$routes->get('/luokka/:id', function($id) {
+    LuokkaController::show($id);
+});
+
+$routes->get('/luokkien_listaus', function() {
+    LuokkaController::index();
+});
+
+// Luokan muokkaus 
+$routes->post('/luokka/:id/muokkaus', function($id) {
+    LuokkaController::update($id);
+});
+
+// Muokkauslomakkeen esittäminen
+$routes->get('/luokka/:id/muokkaus', function($id) {
+    LuokkaController::edit($id);
+});
+
+// luokan poisto
+$routes->post('/luokka/:id/poisto', function($id) {
+    LuokkaController::destroy($id);
+});
+
+
 // Käyttäjä
 
-$routes->get('/login', function(){
-  // Kirjautumislomakkeen esittäminen
-  KayttajaController::login();
+$routes->get('/login', function() {
+    // Kirjautumislomakkeen esittäminen
+    KayttajaController::login();
 });
-$routes->post('/login', function(){
-  // Kirjautumisen käsittely
-  KayttajaController::handle_login();
+$routes->post('/login', function() {
+    // Kirjautumisen käsittely
+    KayttajaController::handle_login();
 });
 
-$routes->post('/logout', function(){
-  KayttajaController::logout();
+$routes->post('/logout', function() {
+    KayttajaController::logout();
 });
 
 $routes->get('/kayttaja/rekisteroityminen', function() {
@@ -104,21 +136,3 @@ $routes->post('/kayttaja', function() {
 $routes->get('/kayttaja/:id', function($id) {
     KayttajaController::show($id);
 });
-// Luokka
-
-$routes->get('/luokkien_listaus', function() {
-    LuokkaController::index();
-});
-$routes->get('/luokka/uusi', function() {
-    LuokkaController::create();
-});
-$routes->post('/luokka', function() {
-    LuokkaController::store();
-});
-
-$routes->get('/luokka/:id', function($id) {
-    LuokkaController::show($id);
-});
-
-
-

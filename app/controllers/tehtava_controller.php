@@ -24,7 +24,8 @@ class TehtavaController extends BaseController {
     }
 
     public static function create() {
-        $luokat = Luokka::all();
+        $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
+        $luokat = Luokka::all($kayttaja_id);
         $tarkeysasteet = Tarkeysaste::all();
         //Kint::dump($tarkeysasteet);
         View::make('tehtava/lisays.html', array('luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
@@ -45,7 +46,7 @@ class TehtavaController extends BaseController {
 
         $errors = $tehtava->errors();
         $tarkeysasteet = Tarkeysaste::all();
-        $luokat = Luokka::all();
+        $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
 
 
 
@@ -64,7 +65,7 @@ class TehtavaController extends BaseController {
     }
 
     public static function edit($id) {
-        $luokat = Luokka::all();
+        $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
         $tarkeysasteet = Tarkeysaste::all();
         $tehtava = Tehtava::find($id);
         View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
@@ -88,7 +89,7 @@ class TehtavaController extends BaseController {
 
         $errors = $tehtava->errors();
         if (count($errors) > 0) {
-            $luokat = Luokka::all();
+            $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
             $tarkeysasteet = Tarkeysaste::all();
             View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
         } else {
