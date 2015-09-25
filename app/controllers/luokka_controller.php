@@ -19,8 +19,6 @@ class LuokkaController extends BaseController {
         $luokat = Luokka::all($kayttaja_id);
 
         View::make('luokka/lisays.html', array('luokat' => $luokat));
-
-        /////////////////////    View::make('luokka/lisays.html');
     }
 
     public static function store() {
@@ -65,13 +63,12 @@ class LuokkaController extends BaseController {
 
         $errors = $luokka->errors();
         if (count($errors) > 0) {
-            Kint::dump($params);
             View::make('luokka/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
 
             $luokka->update();
 
-           Redirect::to('/luokka/' . $luokka->id, array('message' => 'Luokka on muokattu onnistuneesti!'));
+            Redirect::to('/luokka/' . $luokka->id, array('message' => 'Luokka on muokattu onnistuneesti!'));
         }
     }
 

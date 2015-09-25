@@ -1,6 +1,6 @@
 <?php
 
-// update- metodissa jotain vikaa, koska tallentaa uuden vaikka pitäis muokata!!!
+
 
 class Luokka extends BaseModel {
 

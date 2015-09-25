@@ -39,11 +39,7 @@ $routes->get('/luokan_lisays', function() {
     HelloWorldController::luokan_lisays();
 });
 
-//Tehtävä
-//$routes->get('/tehtavien_listaus', function() {
-//    TehtavaController::index();
-//});
-// kokeilu // TOIMIII
+
 $routes->get('/tehtavien_listaus', function() {
     TehtavaController::index();
 });

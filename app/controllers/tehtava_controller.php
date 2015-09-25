@@ -2,15 +2,7 @@
 
 class TehtavaController extends BaseController {
 
-//    public static function index() {
-//
-//        $tehtavat = Tehtava::all();
-//
-//
-//        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
-//    }
-
-    public static function index() { //testaa toimiiko!!!
+    public static function index() {
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $tehtavat = Tehtava::all($kayttaja_id);
         View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
@@ -27,7 +19,6 @@ class TehtavaController extends BaseController {
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $luokat = Luokka::all($kayttaja_id);
         $tarkeysasteet = Tarkeysaste::all();
-        //Kint::dump($tarkeysasteet);
         View::make('tehtava/lisays.html', array('luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
 
@@ -68,6 +59,15 @@ class TehtavaController extends BaseController {
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
         $tarkeysasteet = Tarkeysaste::all();
         $tehtava = Tehtava::find($id);
+        $tehtavanLuokat = array_map(function($luokka) {
+            return $luokka->id;
+        }, Tehtava::tehtavan_luokat($id));
+
+        foreach ($luokat as $luokka) {
+            $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
+        }
+
+
         View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
 
@@ -83,7 +83,6 @@ class TehtavaController extends BaseController {
             'id' => $id
         );
 
-//Kint::dump($params);
 
         $tehtava = new Tehtava($attributes);
 
@@ -93,7 +92,7 @@ class TehtavaController extends BaseController {
             $tarkeysasteet = Tarkeysaste::all();
             View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
         } else {
-            // Kutsutaan alustetun olion update-metodia, joka päivittää tehtävän tiedot tietokannassa
+
             $tehtava->update();
 
             $tehtava->destroy_tehtava_tehtavaluokasta();
@@ -103,14 +102,6 @@ class TehtavaController extends BaseController {
 
             Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
         }
-
-//        $tehtava->update();
-//        $tehtava->destroy_tehtava_tehtavaluokasta();
-//        if (!(empty($params['luokat']))) { //tee metodi
-//            $tehtava->lisaa_luokat($params['luokat']);
-//        }
-//
-//        Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtävä on muokattu onnistuneesti!'));
     }
 
     public static function destroy($id) {
