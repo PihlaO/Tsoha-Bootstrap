@@ -31,7 +31,7 @@
         <label>Tärkeysaste</label> <!miten aiempi valinta näkyviin?>
         <select class="form-control" name="tarkeysaste">
             {% for tarkeysaste in tarkeysasteet %}
-            <option value="{{attributes.tarkeysaste}}">{{tarkeysaste.nimi}}</option>
+            <option value="{{attributes.tarkeysaste}}" >{{tarkeysaste.nimi}}</option>
             {% endfor %}
         </select>
     </div>
@@ -48,8 +48,8 @@
     <div class="form-group">
         <label>Suorituksen tila</label> 
         <select class="form-control" name="suoritettu">
-            <option value="FALSE">Kesken</option>
-            <option value="TRUE">Valmis</option>
+            <option value="FALSE" >Kesken</option>
+            <option value="TRUE" >Valmis </option>
         </select>
     </div>
 
