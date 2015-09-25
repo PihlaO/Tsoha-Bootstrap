@@ -14,7 +14,7 @@
 ## Muistilista
 
 
-Linkit sunniteltuihin näkymiin:
+Linkit sunniteltuihin näkymiin
 
 * [Etusivu] (http://okpiok.users.cs.helsinki.fi/tsoha/)
 * [Rekisteröityminen] (http://okpiok.users.cs.helsinki.fi/tsoha//kayttaja/rekisteroityminen)
