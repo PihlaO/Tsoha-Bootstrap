@@ -20,7 +20,6 @@ class BaseModel {
         // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
         $errors = array();
         foreach ($this->validators as $validator) {
-// Miten tämä???
        $errors = array_merge($errors, $this->{$validator}());
         }
 

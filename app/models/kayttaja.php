@@ -6,7 +6,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validoi_kayttajatunnus', 'validoi_salasana', 'validoi_etunimi', 'validoi_sukunimi', 'validoi_sahkoposti');
+        $this->validators = array('validoi_kayttajatunnuksen_uniikkisuus', 'validoi_kayttajatunnus', 'validoi_salasana', 'validoi_etunimi', 'validoi_sukunimi', 'validoi_sahkoposti');
     }
 
     public static function all() {
@@ -56,6 +56,27 @@ class Kayttaja extends BaseModel {
         return null;
     }
 
+    public static function etsi_kayttajatunnuksella($kayttajatunnus) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus LIMIT 1');
+        $query->execute(array('kayttajatunnus' => $kayttajatunnus));
+        $rivi = $query->fetch();
+
+        if ($rivi) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana'],
+                'etunimi' => $rivi['etunimi'],
+                'sukunimi' => $rivi['sukunimi'],
+                'sahkoposti' => $rivi['sahkoposti']
+            ));
+
+            return $kayttaja;
+        }
+
+        return null;
+    }
+
     public static function authenticate($kayttajatunnus, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1;');
         $query->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
@@ -82,6 +103,14 @@ class Kayttaja extends BaseModel {
         $query->execute(array('kayttajatunnus' => $this->kayttajatunnus, 'salasana' => $this->salasana, 'etunimi' => $this->etunimi, 'sukunimi' => $this->sukunimi, 'sahkoposti' => $this->sahkoposti));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public function validoi_kayttajatunnuksen_uniikkisuus() {
+        $errors = array();
+        if (self::etsi_kayttajatunnuksella($this->kayttajatunnus) != NULL) {
+            $errors[] = 'Käyttäjätunnus on varattu!';
+        }
+        return $errors;
     }
 
     public function validoi_kayttajatunnus() {
