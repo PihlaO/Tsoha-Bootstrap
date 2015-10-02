@@ -6,7 +6,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validoi_kayttajatunnus');
+        $this->validators = array('validoi_kayttajatunnus', 'validoi_salasana', 'validoi_etunimi', 'validoi_sukunimi', 'validoi_sahkoposti');
     }
 
     public static function all() {
@@ -83,10 +83,10 @@ class Kayttaja extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-    
-        public function validoi_kayttajatunnus() {
+
+    public function validoi_kayttajatunnus() {
         $errors = array();
-        if ($this->kayttajatunnus == '' || $this->kayttajatunnus== null) {
+        if ($this->kayttajatunnus == '' || $this->kayttajatunnus == null) {
             $errors[] = 'Käyttäjätunnus ei saa olla tyhjä!';
         }
         if (strlen($this->kayttajatunnus) < 2) {
@@ -94,6 +94,65 @@ class Kayttaja extends BaseModel {
         }
         if (strlen($this->kayttajatunnus) > 20) {
             $errors[] = 'Käyttäjätunnus saa olla enintään 20 merkkiä!';
+        }
+        return $errors;
+    }
+
+    public function validoi_salasana() {
+        $errors = array();
+        if ($this->salasana == '' || $this->salasana == null) {
+            $errors[] = 'Salasana ei saa olla tyhjä!';
+        }
+        if (strlen($this->salasana) < 10) {
+            $errors[] = 'Salasanan pituuden tulee olla vähintään 10 merkkiä!';
+        }
+        if (strlen($this->salasana) > 25) {
+            $errors[] = 'Salasana saa olla enintään 25 merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validoi_etunimi() {
+        $errors = array();
+        if ($this->etunimi == '' || $this->etunimi == null) {
+            $errors[] = 'Etunimi ei saa olla tyhjä!';
+        }
+        if (strlen($this->etunimi) < 2) {
+            $errors[] = 'Etunimen pituuden tulee olla vähintään 2 merkkiä!';
+        }
+        if (strlen($this->etunimi) > 30) {
+            $errors[] = 'Etunimi saa olla enintään 30 merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validoi_sukunimi() {
+        $errors = array();
+        if ($this->sukunimi == '' || $this->sukunimi == null) {
+            $errors[] = 'Sukunimi ei saa olla tyhjä!';
+        }
+        if (strlen($this->sukunimi) < 2) {
+            $errors[] = 'Sukunimen pituuden tulee olla vähintään 2 merkkiä!';
+        }
+        if (strlen($this->sukunimi) > 30) {
+            $errors[] = 'Sukunimi saa olla enintään 30 merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validoi_sahkoposti() {
+        $errors = array();
+        if ($this->sahkoposti == '' || $this->sahkoposti == null) {
+            $errors[] = 'Sähköposti ei saa olla tyhjä!';
+        }
+        if (strlen($this->sahkoposti) < 2) {
+            $errors[] = 'Sähköpostin pituuden tulee olla vähintään 2 merkkiä!';
+        }
+        if (strlen($this->sahkoposti) > 30) {
+            $errors[] = 'Sähköposti saa olla enintään 40 merkkiä!';
         }
 
         return $errors;

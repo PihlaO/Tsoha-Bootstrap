@@ -59,7 +59,7 @@ class TehtavaController extends BaseController {
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
         $tarkeysasteet = Tarkeysaste::all();
         $tehtava = Tehtava::find($id);
-        
+
         $tehtavanLuokat = array_map(function($luokka) {
             return $luokka->id;
         }, Tehtava::tehtavan_luokat($id));
@@ -67,7 +67,7 @@ class TehtavaController extends BaseController {
         foreach ($luokat as $luokka) {
             $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
         }
-        
+
 
         View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }

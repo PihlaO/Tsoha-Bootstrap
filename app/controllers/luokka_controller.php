@@ -15,6 +15,7 @@ class LuokkaController extends BaseController {
     }
 
     public static function create() {
+        
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $luokat = Luokka::all($kayttaja_id);
 

@@ -1,7 +1,7 @@
 
 {% macro poistopainike(action, text) %}
 
-<form method="post" action="{{action}}" style="display: inline-block;">
+<form method="post" action="{{action}}" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa kohteen?" style="display: inline-block;">
     <button type="submit" class="btn btn-default">{{text|default('Poista')}}</button>
 </form>
 

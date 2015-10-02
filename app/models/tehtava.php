@@ -9,7 +9,6 @@ class Tehtava extends BaseModel {
         $this->validators = array('validoi_otsikko', 'validoi_ajankohta');
     }
 
-
     public static function all($kayttaja_id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava  WHERE kayttaja_id=:kayttaja_id');
         $query->execute(array('kayttaja_id' => $kayttaja_id));
@@ -79,7 +78,6 @@ class Tehtava extends BaseModel {
         return $luokat;
     }
 
-
     public function save() {
 
         $query = DB::connection()->prepare('INSERT INTO Tehtava (otsikko, kuvaus, suoritettu, ajankohta, tarkeysaste, kayttaja_id) VALUES (:otsikko, :kuvaus, :suoritettu, :ajankohta, :tarkeysaste,  :kayttaja_id) RETURNING id');
@@ -96,7 +94,7 @@ class Tehtava extends BaseModel {
         $query->execute(array('otsikko' => $this->otsikko, 'kuvaus' => $this->kuvaus, 'suoritettu' => $this->suoritettu, 'ajankohta' => $this->ajankohta, 'tarkeysaste' => $this->tarkeysaste, 'id' => $this->id));
     }
 
-    public function destroy() { 
+    public function destroy() {
         $this->destroy_tehtava_tehtavaluokasta();
         $query = DB::connection()->prepare('DELETE FROM Tehtava WHERE id=:id');
         $query->execute(array('id' => $this->id));
@@ -125,11 +123,13 @@ class Tehtava extends BaseModel {
     public function validoi_ajankohta() {
         $errors = array();
 
-
-
         if ($this->ajankohta == '' || $this->ajankohta == null) { // riittää, että ajankosta ei ole tyhjä 
             $errors[] = 'Ajankohta ei saa olla tyhjä!';
         }
+        if ($this->ajankohta == '' || $this->ajankohta == null) { // riittää, että ajankosta ei ole tyhjä 
+            $errors[] = 'Ajankohta ei saa olla tyhjä!';
+        }
+
 
         return $errors;
     }

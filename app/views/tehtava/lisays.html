@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+
+
 <h1>Lisää tehtävä</h1>
 
 
@@ -18,6 +20,8 @@
         <label>Otsikko</label>
         <input type="text" name="otsikko" class="form-control" value="{{attributes.otsikko}}">
     </div>
+    
+    
 
     <div class="form-group">
         <label>Kuvaus</label>
@@ -28,6 +32,7 @@
         <label>Ajankohta</label> <small claa="text-muted"><p> Kirjoita ajankohta muodossa YYYY-MM-DD HH:MM:SS.</p></small> 
         <input type="text" name="ajankohta" class="form-control" value="{{attributes.ajankohta}}">
     </div>
+    
     <div class="form-group">
 
         <label>Tärkeysaste</label> 

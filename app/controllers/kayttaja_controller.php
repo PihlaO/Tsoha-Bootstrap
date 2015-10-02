@@ -58,7 +58,7 @@ class KayttajaController extends BaseController {
         if (count($errors) == 0) {
             $kayttaja->save();
 
-
+            $_SESSION['kayttaja'] = $kayttaja->id;
             Redirect::to('/kayttaja/' . $kayttaja->id, array('message' => 'Rekisteröityminen onnistui'));
         } else {
             View::make('kayttaja/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));

@@ -16,17 +16,17 @@
 <form method="post" action="{{base_path}}/kayttaja">
     <div class="form-group">
         <label>Etunimi</label>
-        <input type="text" name="etunimi" class="form-control">
+        <input type="text" name="etunimi" class="form-control" value="{{attributes.etunimi}}">
     </div>
 
     <div class="form-group">
         <label>Sukunimi</label>
-        <input type="text" name="sukunimi" class="form-control">
+        <input type="text" name="sukunimi" class="form-control" value="{{attributes.sukunimi}}">
     </div>
 
     <div class="form-group">
         <label>Käyttäjätunnus</label>
-        <input type="text" name="kayttajatunnus" class="form-control">
+        <input type="text" name="kayttajatunnus" class="form-control" value="{{attributes.kayttajatunnus}}">
     </div>
     <div class="form-group">
         <label>Salasana</label>
@@ -35,7 +35,7 @@
 
 <div class="form-group">
     <label>Sähköposti</label>
-    <input type="text" name="sahkoposti" class="form-control">
+    <input type="text" name="sahkoposti" class="form-control" value="{{attributes.sahkoposti}}">
 </div>
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
 </form>

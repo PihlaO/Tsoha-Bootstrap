@@ -49,7 +49,7 @@
         <label>Suorituksen tila</label> 
         <select class="form-control" name="suoritettu">
             <option value="FALSE" >Kesken</option>
-            <option value="TRUE" >Valmis </option>
+            <option value="TRUE" {% if attributes.suoritettu %} selected {% endif %}>Valmis </option>
         </select>
     </div>
 
