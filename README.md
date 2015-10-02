@@ -25,13 +25,13 @@ Linkit sunniteltuihin näkymiin
 * [Tehtävien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtavien_listaus)
 * [Tehtävän esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/1)
 * [Tehtävän lisäyssivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/uusi)
-* [Tehtävän muokkaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/muokkaus) 
+* [Tehtävän muokkaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/tehtava/1/muokkaus) 
   
   Luokat
 * [Luokkien listaussivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokkien_listaus)
 * [Luokan esittelysivu] (http://okpiok.users.cs.helsinki.fi/tsoha/luokka/1)
 * [Luokan lisäysssivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokka/uusi)
-* [Luokan muokkaussivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokan_muokkaus)
+* [Luokan muokkaussivu](http://okpiok.users.cs.helsinki.fi/tsoha/luokan/1/muokkaus)
 
 
 
