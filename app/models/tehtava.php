@@ -126,11 +126,6 @@ class Tehtava extends BaseModel {
         if ($this->ajankohta == '' || $this->ajankohta == null) { // riittää, että ajankosta ei ole tyhjä 
             $errors[] = 'Ajankohta ei saa olla tyhjä!';
         }
-        if ($this->ajankohta == '' || $this->ajankohta == null) { // riittää, että ajankosta ei ole tyhjä 
-            $errors[] = 'Ajankohta ei saa olla tyhjä!';
-        }
-
-
         return $errors;
     }
 

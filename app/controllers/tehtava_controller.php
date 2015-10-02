@@ -57,16 +57,16 @@ class TehtavaController extends BaseController {
 
     public static function edit($id) {
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
-        $tarkeysasteet = Tarkeysaste::all();
         $tehtava = Tehtava::find($id);
 
-        $tehtavanLuokat = array_map(function($luokka) {
-            return $luokka->id;
-        }, Tehtava::tehtavan_luokat($id));
+        $tehtavanLuokat = array_map(function($luokka){ return $luokka->id;}, Tehtava::tehtavan_luokat($id));
 
         foreach ($luokat as $luokka) {
             $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
         }
+        
+        $tarkeysasteet = Tarkeysaste::all();       
+        $valittu_tarkeysaste = $tehtava->tarkeysaste;
 
 
         View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
@@ -97,7 +97,7 @@ class TehtavaController extends BaseController {
             $tehtava->update();
 
             $tehtava->destroy_tehtava_tehtavaluokasta();
-            if (!(empty($params['luokat']))) { //tee metodi
+            if (!(empty($params['luokat']))) {
                 $tehtava->lisaa_luokat($params['luokat']);
             }
 
@@ -109,7 +109,7 @@ class TehtavaController extends BaseController {
 
         $tehtava = new Tehtava(array('id' => $id));
         $tehtava->destroy();
-        Redirect::to('/tehtavien_listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!')); // viesti ei tule näkyviin!
+        Redirect::to('/tehtavien_listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!')); 
     }
 
 }

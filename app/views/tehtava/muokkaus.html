@@ -24,20 +24,21 @@
     </div>
 
     <div class="form-group">
-        <label>Ajankohta</label><small claa="text-muted"><p> Kirjoita ajankohta muodossa YYYY-MM-DD HH:MM:SS.</p></small> 
+        <label>Ajankohta</label> <small class="text-muted"><p> Kirjoita ajankohta muodossa YYYY-MM-DD HH:MM:SS.</p></small> 
         <input type="text" name="ajankohta" class="form-control" value="{{attributes.ajankohta}}"> 
     </div>
+
     <div class="form-group">
         <label>Tärkeysaste</label> <!miten aiempi valinta näkyviin?>
         <select class="form-control" name="tarkeysaste">
             {% for tarkeysaste in tarkeysasteet %}
-            <option value="{{attributes.tarkeysaste}}" >{{tarkeysaste.nimi}}</option>
+            <option value="{{attributes.tarkeysaste}}"{% if attributes.tarkeysaste.val %}selected{% endif %} >{{tarkeysaste.nimi}}</option>
             {% endfor %}
         </select>
     </div>
 
     <div class="form-group">
-        <label>Luokat</label><small class=text-muted"><p > Voit valita monta luokkaa painamalla <kbd><kbd>ctrl</kbd></kbd> valinnan yhteydessä.</p></small>
+        <label>Luokat</label><small class="text-muted"><p> Voit valita monta luokkaa painamalla <kbd><kbd>ctrl</kbd></kbd> valinnan yhteydessä.</p></small>
         <select class="form-control" name="luokat[]" multiple="">
             {% for luokka in luokat %}
             <option value="{{luokka.id}}" {% if luokka.valittu %}selected{% endif %}>{{luokka.nimi}}</option>
@@ -49,7 +50,7 @@
         <label>Suorituksen tila</label> 
         <select class="form-control" name="suoritettu">
             <option value="FALSE" >Kesken</option>
-            <option value="TRUE" {% if attributes.suoritettu %} selected {% endif %}>Valmis </option>
+            <option value="TRUE" {% if attributes.suoritettu %} selected {% endif %}> Valmis </option>
         </select>
     </div>
 
