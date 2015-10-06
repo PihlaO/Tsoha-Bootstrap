@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group">
-        <label>Ajankohta</label> <small class="text-muted"><p> Kirjoita ajankohta muodossa YYYY-MM-DD HH:MM:SS.</p></small> 
+        <label>Ajankohta</label> <small class="text-muted"><p> Kirjoita ajankohta muodossa YYYY-MM-DD.</p></small> 
         <input type="text" name="ajankohta" class="form-control" value="{{attributes.ajankohta}}"> 
     </div>
 
@@ -32,7 +32,7 @@
         <label>Tärkeysaste</label> 
         <select class="form-control" name="tarkeysaste">
             {% for tarkeysaste in tarkeysasteet %}
-            <option value="{{attributes.tarkeysaste}}"{% if attributes.tarkeysaste.val %}selected{% endif %} >{{tarkeysaste.nimi}}</option>
+            <option value="{{tarkeysaste.nimi}}" >{{tarkeysaste.nimi}}</option>
             {% endfor %}
         </select>
     </div>

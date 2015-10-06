@@ -123,9 +123,23 @@ class Tehtava extends BaseModel {
     public function validoi_ajankohta() {
         $errors = array();
 
-        if ($this->ajankohta == '' || $this->ajankohta == null) { // riittää, että ajankosta ei ole tyhjä 
+        if ($this->ajankohta == '' || $this->ajankohta == null) {
             $errors[] = 'Ajankohta ei saa olla tyhjä!';
         }
+
+        $pieces = explode("-", $this->ajankohta);
+        if (count($pieces) != 3) {
+            $errors[] = 'Syötä ajankohta muodossa YYYY-MM-DD';
+        }
+        if (count($pieces) == 3) {
+            $YYYY = (int) $pieces[0];
+            $MM = (int) $pieces[1];
+            $DD = (int) $pieces[2];
+            if (!checkdate($MM, $DD, $YYYY)) {
+                $errors[] = 'Syötämäsi ajankohta ei ole päivämäärä. Syötä ajankohta muodossa YYYY-MM-DD.';
+            }
+        }
+
         return $errors;
     }
 

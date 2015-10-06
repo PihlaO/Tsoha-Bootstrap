@@ -8,15 +8,15 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $doom = new Tehtava(array(
-            'otsikko'=>'otsikko',
-            'ajankohta'=>'22.05.2015',
-            
-            'suoritettu' => ''
-        ));
-        $errors = $doom->errors();
-
-        Kint::dump($errors);
+//        $doom = new Tehtava(array(
+//            'otsikko'=>'otsikko',
+//            'ajankohta'=>'22.05.2015',
+//            
+//            'suoritettu' => ''
+//        ));
+//        $errors = $doom->errors();
+//
+//        Kint::dump($errors);
 //         $tehtava = Tehtava::find(1);
 //        $tehtavat = Tehtava::all();
 //        Kint::dump($tehtava);

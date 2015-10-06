@@ -20,11 +20,11 @@ INSERT INTO Tarkeysaste(nimi) VALUES('Erittäin tärkeä');
 -- TEHTÄVÄ
 
 INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
-VALUES('Tsoha', 'Palauta harjoitustyo','Erittäin tärkeä',  '18-10-2015 23:59', 1);
+VALUES('Tsoha', 'Palauta harjoitustyo','Erittäin tärkeä',  '18-10-2015', 1);
 INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
-VALUES('Ohjaus', 'Kurssin ohjaaminen', 'Tärkeä','10-10-2015 10:00', 1);
+VALUES('Ohjaus', 'Kurssin ohjaaminen', 'Tärkeä','10-10-2015', 1);
 INSERT INTO Tehtava(otsikko, kuvaus, tarkeysaste,ajankohta, kayttaja_id)
-VALUES('Testi', 'Testi tehtävä', 'Tärkeä','1-10-2015 12:15', 2);
+VALUES('Testi', 'Testi tehtävä', 'Tärkeä','1-10-2015', 2);
 
 
 --LUOKKA
