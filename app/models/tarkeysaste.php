@@ -7,6 +7,7 @@ class Tarkeysaste extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
+
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Tarkeysaste');
         $query->execute();
@@ -24,7 +25,8 @@ class Tarkeysaste extends BaseModel {
 
         return $tarkeysasteet;
     }
-        public static function find($id) {
+
+    public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tarkeysaste WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $rivi = $query->fetch();
@@ -34,7 +36,6 @@ class Tarkeysaste extends BaseModel {
                 'id' => $rivi['id'],
                 'nimi' => $rivi['nimi'],
                 'kuvaus' => $rivi['kuvaus']
-
             ));
 
             return $tarkeysaste;
@@ -42,4 +43,23 @@ class Tarkeysaste extends BaseModel {
 
         return null;
     }
+
+    public static function etsi_tarkeysaste_nimella($nimi) {
+        $query = DB::connection()->prepare('SELECT * FROM Tarkeysaste WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $nimi));
+        $rivi = $query->fetch();
+
+        if ($rivi) {
+            $tarkeysaste = new Tarkeysaste(array(
+                'id' => $rivi['id'],
+                'nimi' => $rivi['nimi'],
+                'kuvaus' => $rivi['kuvaus']
+            ));
+
+            return $tarkeysaste;
+        }
+
+        return null;
+    }
+
 }

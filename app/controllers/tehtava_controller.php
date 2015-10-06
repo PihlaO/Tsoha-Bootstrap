@@ -58,19 +58,31 @@ class TehtavaController extends BaseController {
     public static function edit($id) {
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
         $tehtava = Tehtava::find($id);
-        $tarkeysasteet = Tarkeysaste::all();  
-        
-        $tehtavanLuokat = array_map(function($luokka){ return $luokka->id;}, Tehtava::tehtavan_luokat($id));
-        
+        $tarkeysasteet = Tarkeysaste::all();
+
+        $tehtavanLuokat = array_map(function($luokka) {
+            return $luokka->id;
+        }, Tehtava::tehtavan_luokat($id));
+
         foreach ($luokat as $luokka) {
             $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
-        }      
-     
-        $valittu_tarkeysaste = $tehtava->tarkeysaste;
-        
+        }
+
+
+        $valittu_tarkeysaste = array();
+        $valittu_tarkeysaste = array(Tarkeysaste::etsi_tarkeysaste_nimella($tehtava->tarkeysaste));
+
+        $tehtavanTarkeysaste = array_map(function($tarkeysaste) {
+            return $tarkeysaste->id;
+        }, $valittu_tarkeysaste );
+
+        foreach ($tarkeysasteet as $tarkeysaste) {
+            $tarkeysaste->valittu = in_array($tarkeysaste->id, $tehtavanTarkeysaste);
+        }
+
         View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
-    
+
     public static function update($id) {
         $params = $_POST;
 
