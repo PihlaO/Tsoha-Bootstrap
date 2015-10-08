@@ -6,7 +6,7 @@ class Luokka extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validoi_nimi', 'validoi_nimen_uniikkisuus');
+        $this->validators = array('validoi_nimi');
     }
 
     public static function all($kayttaja_id) {
@@ -57,7 +57,6 @@ class Luokka extends BaseModel {
     public function update() {
 
         $query = DB::connection()->prepare('UPDATE Luokka SET nimi = :nimi, kuvaus=:kuvaus, kayttaja_id =:kayttaja_id WHERE id=:id');
-
         $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 'kayttaja_id' => $this->kayttaja_id, 'id' => $this->id));
     }
 
@@ -72,9 +71,9 @@ class Luokka extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
-    public static function etsi_luokan_nimella($nimi) {
-        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE nimi = :nimi LIMIT 1');
-        $query->execute(array('nimi' => $nimi));
+    public static function etsi_luokan_nimella_ja_kayttajalla($nimi, $kayttaja_id) {
+        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE nimi = :nimi AND kayttaja_id=:kayttaja_id LIMIT 1');
+        $query->execute(array('nimi' => $nimi, 'kayttaja_id' => $kayttaja_id));
         $rivi = $query->fetch();
 
         if ($rivi) {
@@ -87,7 +86,6 @@ class Luokka extends BaseModel {
 
             return $luokka;
         }
-
         return null;
     }
 
@@ -107,11 +105,13 @@ class Luokka extends BaseModel {
     }
 
     public function validoi_nimen_uniikkisuus() {
-        $errors = array();
-        if (self::etsi_luokan_nimella($this->nimi) != NULL) {
-            $errors[] = 'Luokan nimi on jo käytössä!';
+
+        if (self::etsi_luokan_nimella_ja_kayttajalla($this->nimi, $this->kayttaja_id) != NULL) {
+            $error = 'Luokan nimi on jo käytössä!';
+            return $error;
+        } else {
+            return null;
         }
-        return $errors;
     }
 
 }

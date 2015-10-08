@@ -25,7 +25,6 @@ class Kayttaja extends BaseModel {
                 'sahkoposti' => $rivi['sahkoposti']
             ));
         }
-
         return $kayttajat;
     }
 

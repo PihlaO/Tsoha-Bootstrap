@@ -27,7 +27,6 @@ class Tehtava extends BaseModel {
                 'kayttaja_id' => $rivi['kayttaja_id']
             ));
         }
-
         return $tehtavat;
     }
 
@@ -46,7 +45,6 @@ class Tehtava extends BaseModel {
                 'tarkeysaste' => $rivi['tarkeysaste'],
                 'kayttaja_id' => $rivi['kayttaja_id']
             ));
-
             return $tehtava;
         }
 
@@ -116,9 +114,15 @@ class Tehtava extends BaseModel {
         if (strlen($this->otsikko) > 50) {
             $errors[] = 'Otsikko saa olla enintään 50 merkkiä!';
         }
-
         return $errors;
     }
+
+//    public function validoi_kuvaus() {
+//        if (strlen($this->kuvaus) > 100) {
+//            $errors[] = 'Kuvaus saa olla enintään 50 merkkiä!';
+//        }
+//        return $errors;
+//    }
 
     public function validoi_ajankohta() {
         $errors = array();

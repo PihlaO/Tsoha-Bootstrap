@@ -34,11 +34,9 @@ class TehtavaController extends BaseController {
             'kayttaja_id' => self::get_user_logged_in()->get_kauttaja_id()
         );
         $tehtava = new Tehtava($attributes);
-
         $errors = $tehtava->errors();
         $tarkeysasteet = Tarkeysaste::all();
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
-
 
 
         if (count($errors) == 0) {
@@ -48,7 +46,6 @@ class TehtavaController extends BaseController {
                 $tehtava->lisaa_luokat($params['luokat']);
             }
 
-
             Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
         } else {
             View::make('tehtava/lisays.html', array('errors' => $errors, 'attributes' => $attributes, 'tarkeysasteet' => $tarkeysasteet, 'luokat' => $luokat));
@@ -56,6 +53,7 @@ class TehtavaController extends BaseController {
     }
 
     public static function edit($id) {
+
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
         $tehtava = Tehtava::find($id);
         $tarkeysasteet = Tarkeysaste::all();
@@ -68,13 +66,12 @@ class TehtavaController extends BaseController {
             $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
         }
 
-
         $valittu_tarkeysaste = array();
         $valittu_tarkeysaste = array(Tarkeysaste::etsi_tarkeysaste_nimella($tehtava->tarkeysaste));
 
         $tehtavanTarkeysaste = array_map(function($tarkeysaste) {
             return $tarkeysaste->id;
-        }, $valittu_tarkeysaste );
+        }, $valittu_tarkeysaste);
 
         foreach ($tarkeysasteet as $tarkeysaste) {
             $tarkeysaste->valittu = in_array($tarkeysaste->id, $tehtavanTarkeysaste);
@@ -94,9 +91,7 @@ class TehtavaController extends BaseController {
             'tarkeysaste' => $params['tarkeysaste'],
             'id' => $id
         );
-//
-//        Kint::dump($params);
-//        
+
         $tehtava = new Tehtava($attributes);
 
         $errors = $tehtava->errors();
@@ -105,10 +100,9 @@ class TehtavaController extends BaseController {
             $tarkeysasteet = Tarkeysaste::all();
             View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
         } else {
-
             $tehtava->update();
-
             $tehtava->destroy_tehtava_tehtavaluokasta();
+
             if (!(empty($params['luokat']))) {
                 $tehtava->lisaa_luokat($params['luokat']);
             }
