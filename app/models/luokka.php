@@ -6,7 +6,7 @@ class Luokka extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validoi_nimi');
+        $this->validators = array('validoi_nimi', 'validoi_kuvaus');
     }
 
     public static function all($kayttaja_id) {
@@ -112,6 +112,13 @@ class Luokka extends BaseModel {
         } else {
             return null;
         }
+    }
+    public function validoi_kuvaus() {
+        $errors = array();
+        if (strlen($this->kuvaus) > 500) {
+            $errors[] = 'Kuvaus saa olla enintään 500 merkkiä!';
+        }
+        return $errors;
     }
 
 }

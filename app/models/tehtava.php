@@ -6,7 +6,7 @@ class Tehtava extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validoi_otsikko', 'validoi_ajankohta');
+        $this->validators = array('validoi_otsikko', 'validoi_ajankohta', 'validoi_kuvaus');
     }
 
     public static function all($kayttaja_id) {
@@ -117,12 +117,6 @@ class Tehtava extends BaseModel {
         return $errors;
     }
 
-//    public function validoi_kuvaus() {
-//        if (strlen($this->kuvaus) > 100) {
-//            $errors[] = 'Kuvaus saa olla enintään 50 merkkiä!';
-//        }
-//        return $errors;
-//    }
 
     public function validoi_ajankohta() {
         $errors = array();
@@ -144,6 +138,13 @@ class Tehtava extends BaseModel {
             }
         }
 
+        return $errors;
+    }
+        public function validoi_kuvaus() {
+        $errors = array();
+        if (strlen($this->kuvaus) > 1900) {
+            $errors[] = 'Kuvaus saa olla enintään 1900 merkkiä!';
+        }
         return $errors;
     }
 
