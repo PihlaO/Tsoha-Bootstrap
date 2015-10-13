@@ -17,6 +17,12 @@ $routes->get('/hiekkalaatikko', function() {
 
 //Tehtävä
 
+////Kokeilu
+$routes->get('/tehtavien_listaus/:id','check_logged_in', function($id) {
+    TehtavaController::show_tehtavat_tietystä_luokasta($id);
+});
+/////
+
 $routes->get('/tehtavien_listaus','check_logged_in', function() {
     TehtavaController::index();
 });
@@ -64,6 +70,8 @@ $routes->get('/luokka/:id','check_logged_in', function($id) {
     LuokkaController::show($id);
 });
 
+
+
 $routes->get('/luokkien_listaus','check_logged_in', function() {
     LuokkaController::index();
 });
@@ -82,7 +90,6 @@ $routes->get('/luokka/:id/muokkaus','check_logged_in', function($id) {
 $routes->post('/luokka/:id/poisto', function($id) {
     LuokkaController::destroy($id);
 });
-
 
 // Käyttäjä
 

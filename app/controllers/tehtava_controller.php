@@ -14,7 +14,14 @@ class TehtavaController extends BaseController {
 
         View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
-
+///Kokeilu
+    public static function show_tehtavat_tietystä_luokasta($luokka_id) {
+        $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
+        $tehtavat = Tehtava::etsi_kaikki_luokan_tehtavat($kayttaja_id, $luokka_id);
+                $luokka = Luokka::find($luokka_id);
+        View::make('luokka/tehtavien_listaus.html', array('tehtavat' => $tehtavat, 'luokka'=> $luokka));
+    }
+////
     public static function create() {
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $luokat = Luokka::all($kayttaja_id);

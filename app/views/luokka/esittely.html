@@ -13,9 +13,17 @@
     {{luokka.kuvaus}}
 </p>
 
-    <a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
-    {{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}
+<h4>Luokan tehtävät</h4>
+
+<a href="{{base_path}}/tehtavien_listaus/{{luokka.id}}" > Listaus </a>   luokan tehtävistä.
+
+<h4> </h4>
+<a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> 
+{{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}
+
 
 
 
 {% endblock %}
+
+

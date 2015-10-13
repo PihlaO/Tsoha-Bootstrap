@@ -10,7 +10,7 @@ class Tehtava extends BaseModel {
     }
 
     public static function all($kayttaja_id) {
-        $query = DB::connection()->prepare('SELECT * FROM Tehtava  WHERE kayttaja_id=:kayttaja_id');
+        $query = DB::connection()->prepare('SELECT * FROM Tehtava  WHERE kayttaja_id=:kayttaja_id ORDER BY ajankohta');
         $query->execute(array('kayttaja_id' => $kayttaja_id));
 
         $rivit = $query->fetchAll();
@@ -29,6 +29,31 @@ class Tehtava extends BaseModel {
         }
         return $tehtavat;
     }
+
+    ///// Kokeilu
+    public static function etsi_kaikki_luokan_tehtavat($kayttaja_id, $luokka_id) {
+        $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE kayttaja_id=:kayttaja_id AND id IN (SELECT tehtava_id FROM Tehtavaluokka WHERE luokka_id=:luokka_id) ORDER BY ajankohta');
+        $query->execute(array('kayttaja_id' => $kayttaja_id, 'luokka_id' => $luokka_id));
+
+        $rivit = $query->fetchAll();
+        $tehtavat = array();
+
+        foreach ($rivit as $rivi) {
+            $tehtavat[] = new Tehtava(array(
+                'id' => $rivi['id'],
+                'otsikko' => $rivi['otsikko'],
+                'kuvaus' => $rivi['kuvaus'],
+                'suoritettu' => $rivi['suoritettu'],
+                'ajankohta' => $rivi['ajankohta'],
+                'tarkeysaste' => $rivi['tarkeysaste'],
+                'kayttaja_id' => $rivi['kayttaja_id']
+            ));
+        }
+        return $tehtavat;
+    }
+
+  
+    /////         
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE id = :id LIMIT 1');
@@ -117,7 +142,6 @@ class Tehtava extends BaseModel {
         return $errors;
     }
 
-
     public function validoi_ajankohta() {
         $errors = array();
 
@@ -140,7 +164,8 @@ class Tehtava extends BaseModel {
 
         return $errors;
     }
-        public function validoi_kuvaus() {
+
+    public function validoi_kuvaus() {
         $errors = array();
         if (strlen($this->kuvaus) > 1900) {
             $errors[] = 'Kuvaus saa olla enintään 1900 merkkiä!';
