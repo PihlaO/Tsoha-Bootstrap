@@ -1,29 +1,16 @@
 <?php
 
-
-function check_logged_in(){
-  BaseController::check_logged_in();
+function check_logged_in() {
+    BaseController::check_logged_in();
 }
-
-///ETUSIVU/muistilista
-$routes->get('/', function() {
-    TehtavaController::etusivu();
-});
-///
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
-
 
 //Tehtävä
 
-////Kokeilu
-$routes->get('/tehtavien_listaus/:id','check_logged_in', function($id) {
+$routes->get('/tehtavien_listaus/:id', 'check_logged_in', function($id) {
     TehtavaController::nayta_tehtavat_tietysta_luokasta($id);
 });
-/////
 
-$routes->get('/tehtavien_listaus','check_logged_in', function() {
+$routes->get('/tehtavien_listaus', 'check_logged_in', function() {
     TehtavaController::index();
 });
 
@@ -32,26 +19,26 @@ $routes->post('/tehtava', function() {
     TehtavaController::store();
 });
 
-$routes->get('/tehtava/uusi','check_logged_in', function() {
+$routes->get('/tehtava/uusi', 'check_logged_in', function() {
     TehtavaController::create();
 });
 
-$routes->get('/tehtava/:id','check_logged_in', function($id) {
+$routes->get('/tehtava/:id', 'check_logged_in', function($id) {
     TehtavaController::show($id);
 });
 
 // Muokkauslomakkeen esittäminen
-$routes->get('/tehtava/:id/muokkaus','check_logged_in', function($id) {
+$routes->get('/tehtava/:id/muokkaus', 'check_logged_in', function($id) {
     TehtavaController::edit($id);
 });
 
 // Tehtävän muokkaus 
-$routes->post('/tehtava/:id/muokkaus','check_logged_in',function($id) {
+$routes->post('/tehtava/:id/muokkaus', 'check_logged_in', function($id) {
     TehtavaController::update($id);
 });
 
 // Tehtävän poisto
-$routes->post('/tehtava/:id/poisto','check_logged_in', function($id) {
+$routes->post('/tehtava/:id/poisto', 'check_logged_in', function($id) {
     TehtavaController::destroy($id);
 });
 
@@ -62,17 +49,17 @@ $routes->post('/luokka', function() {
     LuokkaController::store();
 });
 
-$routes->get('/luokka/uusi','check_logged_in', function() {
+$routes->get('/luokka/uusi', 'check_logged_in', function() {
     LuokkaController::create();
 });
 
-$routes->get('/luokka/:id','check_logged_in', function($id) {
+$routes->get('/luokka/:id', 'check_logged_in', function($id) {
     LuokkaController::show($id);
 });
 
 
 
-$routes->get('/luokkien_listaus','check_logged_in', function() {
+$routes->get('/luokkien_listaus', 'check_logged_in', function() {
     LuokkaController::index();
 });
 
@@ -82,7 +69,7 @@ $routes->post('/luokka/:id/muokkaus', function($id) {
 });
 
 // Muokkauslomakkeen esittäminen
-$routes->get('/luokka/:id/muokkaus','check_logged_in', function($id) {
+$routes->get('/luokka/:id/muokkaus', 'check_logged_in', function($id) {
     LuokkaController::edit($id);
 });
 
@@ -113,8 +100,13 @@ $routes->get('/kayttaja/rekisteroityminen', function() {
 $routes->post('/kayttaja', function() {
     KayttajaController::store();
 });
-$routes->get('/kayttaja/:id','check_logged_in', function($id) {
+$routes->get('/kayttaja/:id', 'check_logged_in', function($id) {
     KayttajaController::show($id);
+});
+
+///Etusivu/Muistilista
+$routes->get('/', function() {
+    TehtavaController::etusivu();
 });
 
 
@@ -146,4 +138,8 @@ $routes->get('/kayttaja/:id','check_logged_in', function($id) {
 //});
 //$routes->get('/luokan_lisays', function() {
 //    HelloWorldController::luokan_lisays();
+//});
+//
+//$routes->get('/hiekkalaatikko', function() {
+//    HelloWorldController::sandbox();
 //});
