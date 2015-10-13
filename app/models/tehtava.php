@@ -51,7 +51,6 @@ class Tehtava extends BaseModel {
         return $tehtavat;
     }
 
-
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -166,6 +165,13 @@ class Tehtava extends BaseModel {
         $errors = array();
         if (strlen($this->kuvaus) > 1900) {
             $errors[] = 'Kuvaus saa olla enintään 1900 merkkiä!';
+        }
+        $pieces = explode(" ", $this->kuvaus);
+        foreach ($pieces as $piece) {
+            if (strlen($piece) > 120) {
+                $errors[] = 'Kuvauksessasi on ainakin yksi sana, joka on yli 120 merkkiä. Tarkista kuvauksen oikeinkirjoitus ja korjaa virheet.';
+                break;
+            }
         }
         return $errors;
     }
