@@ -120,7 +120,8 @@ class Luokka extends BaseModel {
             $errors[] = 'Kuvaus saa olla enintään 500 merkkiä!';
         }
 
-
+///kokeilu
+        
         if (strlen($this->kuvaus) > 150) {
             if (str_word_count($this->kuvaus, 0) == 1) {
                 $errors[] = 'Kuvauksessasi on yli 150 merkkiä, mutta ei yhtään väliä. Lisää kuvauksen sanojen väliin välit.';

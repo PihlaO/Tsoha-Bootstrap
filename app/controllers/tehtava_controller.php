@@ -11,17 +11,16 @@ class TehtavaController extends BaseController {
     public static function show($id) {
         $tehtava = Tehtava::find($id);
         $luokat = Tehtava::tehtavan_luokat($id);
-
         View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
-///Kokeilu
+
     public static function show_tehtavat_tietystä_luokasta($luokka_id) {
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $tehtavat = Tehtava::etsi_kaikki_luokan_tehtavat($kayttaja_id, $luokka_id);
-                $luokka = Luokka::find($luokka_id);
-        View::make('luokka/tehtavien_listaus.html', array('tehtavat' => $tehtavat, 'luokka'=> $luokka));
+        $luokka = Luokka::find($luokka_id);
+        View::make('luokka/tehtavien_listaus.html', array('tehtavat' => $tehtavat, 'luokka' => $luokka));
     }
-////
+
     public static function create() {
         $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
         $luokat = Luokka::all($kayttaja_id);
@@ -30,7 +29,6 @@ class TehtavaController extends BaseController {
     }
 
     public static function store() {
-
         $params = $_POST;
         $attributes = array(
             'otsikko' => $params['otsikko'],
@@ -44,7 +42,6 @@ class TehtavaController extends BaseController {
         $errors = $tehtava->errors();
         $tarkeysasteet = Tarkeysaste::all();
         $luokat = Luokka::all(self::get_user_logged_in()->get_kauttaja_id());
-
 
         if (count($errors) == 0) {
             $tehtava->save();
@@ -65,6 +62,13 @@ class TehtavaController extends BaseController {
         $tehtava = Tehtava::find($id);
         $tarkeysasteet = Tarkeysaste::all();
 
+        self::valitut_luokat($id, $luokat);
+        self::valittu_tarkeysaste($tehtava, $tarkeysasteet);
+
+        View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
+    }
+
+    public static function valitut_luokat($id, $luokat) {
         $tehtavanLuokat = array_map(function($luokka) {
             return $luokka->id;
         }, Tehtava::tehtavan_luokat($id));
@@ -72,8 +76,10 @@ class TehtavaController extends BaseController {
         foreach ($luokat as $luokka) {
             $luokka->valittu = in_array($luokka->id, $tehtavanLuokat);
         }
+    }
 
-        $valittu_tarkeysaste = array();
+    public static function valittu_tarkeysaste($tehtava, $tarkeysasteet) {
+
         $valittu_tarkeysaste = array(Tarkeysaste::etsi_tarkeysaste_nimella($tehtava->tarkeysaste));
 
         $tehtavanTarkeysaste = array_map(function($tarkeysaste) {
@@ -83,13 +89,10 @@ class TehtavaController extends BaseController {
         foreach ($tarkeysasteet as $tarkeysaste) {
             $tarkeysaste->valittu = in_array($tarkeysaste->id, $tehtavanTarkeysaste);
         }
-
-        View::make('tehtava/muokkaus.html', array('attributes' => $tehtava, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
     }
 
     public static function update($id) {
         $params = $_POST;
-
         $attributes = array(
             'otsikko' => $params['otsikko'],
             'kuvaus' => $params['kuvaus'],

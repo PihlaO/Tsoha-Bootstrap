@@ -30,7 +30,6 @@ class Tehtava extends BaseModel {
         return $tehtavat;
     }
 
-    ///// Kokeilu
     public static function etsi_kaikki_luokan_tehtavat($kayttaja_id, $luokka_id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE kayttaja_id=:kayttaja_id AND id IN (SELECT tehtava_id FROM Tehtavaluokka WHERE luokka_id=:luokka_id) ORDER BY ajankohta');
         $query->execute(array('kayttaja_id' => $kayttaja_id, 'luokka_id' => $luokka_id));
@@ -52,8 +51,6 @@ class Tehtava extends BaseModel {
         return $tehtavat;
     }
 
-  
-    /////         
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE id = :id LIMIT 1');
