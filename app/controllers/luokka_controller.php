@@ -49,7 +49,7 @@ class LuokkaController extends BaseController {
 
     public static function edit($id) {
         $luokka = Luokka::find($id);
-       
+
         View::make('luokka/muokkaus.html', array('attributes' => $luokka));
     }
 
@@ -62,7 +62,7 @@ class LuokkaController extends BaseController {
             'kayttaja_id' => self::get_user_logged_in()->hae_kayttaja_id(),
             'id' => $id
         );
-         
+
         $luokka = new Luokka($attributes);
         $errors = $luokka->errors();
 

@@ -58,7 +58,6 @@ $routes->get('/luokka/:id', 'check_logged_in', function($id) {
 });
 
 
-
 $routes->get('/luokkien_listaus', 'check_logged_in', function() {
     LuokkaController::index();
 });

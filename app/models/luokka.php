@@ -119,14 +119,14 @@ class Luokka extends BaseModel {
         if (strlen($this->kuvaus) > 500) {
             $errors[] = 'Kuvaus saa olla enintään 500 merkkiä!';
         }
-        
-         $pieces = explode(" ", $this->kuvaus);
-         foreach ($pieces as $piece){
-             if(strlen($piece)> 120){
-                 $errors[] = 'Kuvauksessasi on ainakin yksi sana, joka on yli 120 merkkiä. Tarkista kuvauksen oikeinkirjoitus ja korjaa virheet.';
-                 break;
-             }
-         }
+
+        $pieces = explode(" ", $this->kuvaus);
+        foreach ($pieces as $piece) {
+            if (strlen($piece) > 120) {
+                $errors[] = 'Kuvauksessasi on ainakin yksi sana, joka on yli 120 merkkiä. Tarkista kuvauksen oikeinkirjoitus ja korjaa virheet.';
+                break;
+            }
+        }
 
         return $errors;
     }

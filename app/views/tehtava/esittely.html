@@ -15,9 +15,7 @@
 <li>Tila: Kesken</li>
 {% endif %}
 
-
 <li>Tärkeysaste: {{tehtava.tarkeysaste}}</li> 
-
 
 <li>Luokat: 
     {% for luokka in luokat %}  
@@ -31,8 +29,6 @@
 </p>
 <a href="{{base_path}}/tehtava/{{tehtava.id}}/muokkaus" class="btn btn-default">Muokkaa</a>  <!tee tästä myös makro>
 
-
 {{forms.poistopainike("#{base_path}/tehtava/#{tehtava.id}/poisto")}}
-
 
 {% endblock %}

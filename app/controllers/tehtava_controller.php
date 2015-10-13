@@ -13,7 +13,8 @@ class TehtavaController extends BaseController {
         $luokat = Tehtava::tehtavan_luokat($id);
         View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
-        public static function etusivu() {
+
+    public static function etusivu() {
         View::make('etusivu.html');
     }
 
@@ -48,11 +49,9 @@ class TehtavaController extends BaseController {
 
         if (count($errors) == 0) {
             $tehtava->save();
-
             if (!(empty($params['luokat']))) {
                 $tehtava->lisaa_luokat($params['luokat']);
             }
-
             Redirect::to('/tehtava/' . $tehtava->id, array('message' => 'Tehtavä on lisätty muistilistaasi!'));
         } else {
             View::make('tehtava/lisays.html', array('errors' => $errors, 'attributes' => $attributes, 'tarkeysasteet' => $tarkeysasteet, 'luokat' => $luokat));

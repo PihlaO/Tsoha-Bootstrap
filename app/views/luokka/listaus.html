@@ -30,10 +30,10 @@
 
             <td>{{luokka.kuvaus}}</td> 
 
-                        <th>    <a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> </th>
-                        <th>{{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}</th>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                        </table>
-                        {% endblock %}
+            <th>    <a href="{{base_path}}/luokka/{{luokka.id}}/muokkaus" class="btn btn-default">Muokkaa</a> </th>
+            <th>{{forms.poistopainike("#{base_path}/luokka/#{luokka.id}/poisto")}}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
