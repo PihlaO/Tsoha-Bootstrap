@@ -28,7 +28,7 @@ class Kayttaja extends BaseModel {
         return $kayttajat;
     }
 
-    public static function get_kauttaja_id() {
+    public static function hae_kayttaja_id() {
         $kayttaja = TehtavaController::get_user_logged_in();
         $kayttaja_id = $kayttaja->id;
         return $kayttaja_id;

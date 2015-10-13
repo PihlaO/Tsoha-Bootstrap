@@ -3,7 +3,7 @@
 class LuokkaController extends BaseController {
 
     public static function index() {
-        $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
+        $kayttaja_id = self::get_user_logged_in()->hae_kayttaja_id();
         $luokat = Luokka::all($kayttaja_id);
         View::make('luokka/listaus.html', array('luokat' => $luokat));
     }
@@ -15,7 +15,7 @@ class LuokkaController extends BaseController {
 
     public static function create() {
 
-        $kayttaja_id = self::get_user_logged_in()->get_kauttaja_id();
+        $kayttaja_id = self::get_user_logged_in()->hae_kayttaja_id();
         $luokat = Luokka::all($kayttaja_id);
         View::make('luokka/lisays.html', array('luokat' => $luokat));
     }
@@ -25,11 +25,11 @@ class LuokkaController extends BaseController {
         $attributes = (array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
-            'kayttaja_id' => self::get_user_logged_in()->get_kauttaja_id()
+            'kayttaja_id' => self::get_user_logged_in()->hae_kayttaja_id()
         ));
 
         $luokka = new Luokka($attributes);
-        $errors = self::hae_errors($luokka);
+        $errors = self::get_errors($luokka);
         if (count($errors) == 0) {
             $luokka->save();
             Redirect::to('/luokka/' . $luokka->id, array('message' => 'Luokka on lisätty tehtäväluokkiisi!'));
@@ -38,7 +38,7 @@ class LuokkaController extends BaseController {
         }
     }
 
-    public static function hae_errors($luokka) {
+    public static function get_errors($luokka) {
         $errors = $luokka->errors();
         $error = $luokka->validoi_nimen_uniikkisuus();
         if ($error != NULL) {
@@ -59,7 +59,7 @@ class LuokkaController extends BaseController {
         $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
-            'kayttaja_id' => self::get_user_logged_in()->get_kauttaja_id(),
+            'kayttaja_id' => self::get_user_logged_in()->hae_kayttaja_id(),
             'id' => $id
         );
          

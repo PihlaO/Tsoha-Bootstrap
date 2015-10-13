@@ -114,12 +114,12 @@ class Tehtava extends BaseModel {
     }
 
     public function destroy() {
-        $this->destroy_tehtava_tehtavaluokasta();
+        $this->poista_tehtava_tehtavaluokasta();
         $query = DB::connection()->prepare('DELETE FROM Tehtava WHERE id=:id');
         $query->execute(array('id' => $this->id));
     }
 
-    public function destroy_tehtava_tehtavaluokasta() {
+    public function poista_tehtava_tehtavaluokasta() {
         $query = DB::connection()->prepare('DELETE FROM Tehtavaluokka WHERE tehtava_id=:id');
         $query->execute(array('id' => $this->id));
     }

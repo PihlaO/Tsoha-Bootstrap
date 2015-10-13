@@ -7,7 +7,7 @@ function check_logged_in(){
 
 ///ETUSIVU/muistilista
 $routes->get('/', function() {
-    HelloWorldController::etusivu();
+    TehtavaController::etusivu();
 });
 ///
 $routes->get('/hiekkalaatikko', function() {
@@ -19,7 +19,7 @@ $routes->get('/hiekkalaatikko', function() {
 
 ////Kokeilu
 $routes->get('/tehtavien_listaus/:id','check_logged_in', function($id) {
-    TehtavaController::show_tehtavat_tietystä_luokasta($id);
+    TehtavaController::nayta_tehtavat_tietysta_luokasta($id);
 });
 /////
 

@@ -61,12 +61,12 @@ class Luokka extends BaseModel {
     }
 
     public function destroy() {
-        $this->destroy_luokka_tehtavaluokasta();
+        $this->poista_luokka_tehtavaluokasta();
         $query = DB::connection()->prepare('DELETE FROM Luokka WHERE id=:id');
         $query->execute(array('id' => $this->id));
     }
 
-    public function destroy_luokka_tehtavaluokasta() {
+    public function poista_luokka_tehtavaluokasta() {
         $query = DB::connection()->prepare('DELETE FROM Tehtavaluokka WHERE luokka_id=:id');
         $query->execute(array('id' => $this->id));
     }
