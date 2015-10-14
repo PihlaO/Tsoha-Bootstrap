@@ -10,7 +10,7 @@ class Luokka extends BaseModel {
     }
 
     public static function all($kayttaja_id) {
-        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE kayttaja_id=:kayttaja_id');
+        $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE kayttaja_id=:kayttaja_id ORDER BY nimi');
         $query->execute(array('kayttaja_id' => $kayttaja_id));
 
         $rivit = $query->fetchAll();

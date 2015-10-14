@@ -11,7 +11,7 @@ $routes->get('/tehtavien_listaus/:id', 'check_logged_in', function($id) {
 });
 
 $routes->get('/tehtavien_listaus', 'check_logged_in', function() {
-    TehtavaController::index();
+    TehtavaController::tehtavien_listaus();
 });
 
 
@@ -59,7 +59,7 @@ $routes->get('/luokka/:id', 'check_logged_in', function($id) {
 
 
 $routes->get('/luokkien_listaus', 'check_logged_in', function() {
-    LuokkaController::index();
+    LuokkaController::luokkien_listaus();
 });
 
 // Luokan muokkaus 
@@ -105,7 +105,7 @@ $routes->get('/kayttaja/:id', 'check_logged_in', function($id) {
 
 ///Etusivu/Muistilista
 $routes->get('/', function() {
-    TehtavaController::etusivu();
+    TehtavaController::index();
 });
 
 

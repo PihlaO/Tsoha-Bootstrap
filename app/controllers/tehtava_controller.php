@@ -3,9 +3,7 @@
 class TehtavaController extends BaseController {
 
     public static function index() {
-        $kayttaja_id = self::get_user_logged_in()->hae_kayttaja_id();
-        $tehtavat = Tehtava::all($kayttaja_id);
-        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
+        View::make('etusivu.html');
     }
 
     public static function show($id) {
@@ -14,8 +12,10 @@ class TehtavaController extends BaseController {
         View::make('tehtava/esittely.html', array('tehtava' => $tehtava, 'luokat' => $luokat));
     }
 
-    public static function etusivu() {
-        View::make('etusivu.html');
+    public static function tehtavien_listaus() {
+        $kayttaja_id = self::get_user_logged_in()->hae_kayttaja_id();
+        $tehtavat = Tehtava::all($kayttaja_id);
+        View::make('tehtava/listaus.html', array('tehtavat' => $tehtavat));
     }
 
     public static function nayta_tehtavat_tietysta_luokasta($luokka_id) {

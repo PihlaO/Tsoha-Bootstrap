@@ -2,7 +2,7 @@
 
 class LuokkaController extends BaseController {
 
-    public static function index() {
+    public static function luokkien_listaus() {
         $kayttaja_id = self::get_user_logged_in()->hae_kayttaja_id();
         $luokat = Luokka::all($kayttaja_id);
         View::make('luokka/listaus.html', array('luokat' => $luokat));
