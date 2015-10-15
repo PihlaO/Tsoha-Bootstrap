@@ -28,36 +28,9 @@ class Kayttaja extends BaseModel {
         return $kayttajat;
     }
 
-    public static function hae_kayttaja_id() {
-        $kayttaja = TehtavaController::get_user_logged_in();
-        $kayttaja_id = $kayttaja->id;
-        return $kayttaja_id;
-    }
-
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
-        $rivi = $query->fetch();
-
-        if ($rivi) {
-            $kayttaja = new Kayttaja(array(
-                'id' => $rivi['id'],
-                'kayttajatunnus' => $rivi['kayttajatunnus'],
-                'salasana' => $rivi['salasana'],
-                'etunimi' => $rivi['etunimi'],
-                'sukunimi' => $rivi['sukunimi'],
-                'sahkoposti' => $rivi['sahkoposti']
-            ));
-
-            return $kayttaja;
-        }
-
-        return null;
-    }
-
-    public static function etsi_kayttajatunnuksella($kayttajatunnus) {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus LIMIT 1');
-        $query->execute(array('kayttajatunnus' => $kayttajatunnus));
         $rivi = $query->fetch();
 
         if ($rivi) {
@@ -102,6 +75,33 @@ class Kayttaja extends BaseModel {
         $query->execute(array('kayttajatunnus' => $this->kayttajatunnus, 'salasana' => $this->salasana, 'etunimi' => $this->etunimi, 'sukunimi' => $this->sukunimi, 'sahkoposti' => $this->sahkoposti));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public static function hae_kayttaja_id() {
+        $kayttaja = TehtavaController::get_user_logged_in();
+        $kayttaja_id = $kayttaja->id;
+        return $kayttaja_id;
+    }
+
+    public static function etsi_kayttajatunnuksella($kayttajatunnus) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus LIMIT 1');
+        $query->execute(array('kayttajatunnus' => $kayttajatunnus));
+        $rivi = $query->fetch();
+
+        if ($rivi) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana'],
+                'etunimi' => $rivi['etunimi'],
+                'sukunimi' => $rivi['sukunimi'],
+                'sahkoposti' => $rivi['sahkoposti']
+            ));
+
+            return $kayttaja;
+        }
+
+        return null;
     }
 
     public function validoi_kayttajatunnuksen_uniikkisuus() {

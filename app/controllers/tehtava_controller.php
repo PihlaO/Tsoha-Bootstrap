@@ -101,7 +101,8 @@ class TehtavaController extends BaseController {
             'suoritettu' => $params['suoritettu'],
             'ajankohta' => $params['ajankohta'],
             'tarkeysaste' => $params['tarkeysaste'],
-            'id' => $id
+            'id' => $id,
+            'luokat' => $params['luokat']
         );
 
         $tehtava = new Tehtava($attributes);
@@ -109,6 +110,13 @@ class TehtavaController extends BaseController {
         $errors = $tehtava->errors();
         if (count($errors) > 0) {
             $luokat = Luokka::all(self::get_user_logged_in()->hae_kayttaja_id());
+            $valitut_luokat = $params['luokat'];
+
+            foreach ($luokat as $luokka) {
+                $luokka->valittu = in_array($luokka->id, $valitut_luokat);
+            }
+
+
             $tarkeysasteet = Tarkeysaste::all();
             View::make('tehtava/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'luokat' => $luokat, 'tarkeysasteet' => $tarkeysasteet));
         } else {

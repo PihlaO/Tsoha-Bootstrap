@@ -33,7 +33,7 @@
         <label>Tärkeysaste</label> 
         <select class="form-control" name="tarkeysaste">
             {% for tarkeysaste in tarkeysasteet %}
-            <option value="{{tarkeysaste.nimi}}" {% if tarkeysaste.valittu %}selected{% endif %} >{{tarkeysaste.nimi}}</option>
+            <option value="{{tarkeysaste.nimi}}" {% if attributes.tarkeysaste == tarkeysaste.nimi %}selected{% endif %} >{{tarkeysaste.nimi}}</option>
             {% endfor %}
         </select>
     </div>
@@ -50,8 +50,8 @@
     <div class="form-group">
         <label>Suorituksen tila</label> 
         <select class="form-control" name="suoritettu">
-            <option value="FALSE" >Kesken</option>
-            <option value="TRUE" {% if attributes.suoritettu %} selected {% endif %}> Valmis </option>
+            <option value="FALSE" {% if attributes.suoritettu == "FALSE"  %} selected {% endif %}>Kesken</option>
+            <option value="TRUE" {% if attributes.suoritettu == "TRUE"  %} selected {% endif %}> Valmis </option>
         </select>
     </div>
 

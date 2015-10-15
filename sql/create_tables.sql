@@ -24,7 +24,7 @@ CONSTRAINT fk_kayttaja_id FOREIGN KEY(kayttaja_id) REFERENCES Kayttaja(id)
 
 CREATE TABLE Tehtava(
 id SERIAL PRIMARY KEY NOT NULL,
-otsikko VARCHAR(200) NOT NULL,
+otsikko VARCHAR(100) NOT NULL,
 kuvaus VARCHAR(2000),
 suoritettu BOOLEAN DEFAULT FALSE,
 ajankohta DATE,
