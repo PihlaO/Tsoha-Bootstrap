@@ -60,7 +60,7 @@ class KayttajaController extends BaseController {
             $kayttaja->save();
 
             $_SESSION['kayttaja'] = $kayttaja->id;
-            Redirect::to('/kayttaja/' . $kayttaja->id, array('message' => 'Rekisteröityminen onnistui'));
+            Redirect::to('/kayttaja/' . $kayttaja->id, array('message' => 'Rekisteröityminen onnistui. Tervetuloa Muistilista-sovellukseen!'));
         } else {
             View::make('kayttaja/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));
         }
