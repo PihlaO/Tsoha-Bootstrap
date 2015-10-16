@@ -94,16 +94,28 @@ class TehtavaController extends BaseController {
     }
 
     public static function update($id) {
+
         $params = $_POST;
-        $attributes = array(
-            'otsikko' => $params['otsikko'],
-            'kuvaus' => $params['kuvaus'],
-            'suoritettu' => $params['suoritettu'],
-            'ajankohta' => $params['ajankohta'],
-            'tarkeysaste' => $params['tarkeysaste'],
-            'id' => $id,
-            'luokat' => $params['luokat']
-        );
+        if (!empty($params['luokat'])) {
+            $attributes = array(
+                'otsikko' => $params['otsikko'],
+                'kuvaus' => $params['kuvaus'],
+                'suoritettu' => $params['suoritettu'],
+                'ajankohta' => $params['ajankohta'],
+                'tarkeysaste' => $params['tarkeysaste'],
+                'id' => $id,
+                'luokat' => $params['luokat']
+            );
+        } else {
+            $attributes = array(
+                'otsikko' => $params['otsikko'],
+                'kuvaus' => $params['kuvaus'],
+                'suoritettu' => $params['suoritettu'],
+                'ajankohta' => $params['ajankohta'],
+                'tarkeysaste' => $params['tarkeysaste'],
+                'id' => $id
+            );
+        }
 
         $tehtava = new Tehtava($attributes);
 
