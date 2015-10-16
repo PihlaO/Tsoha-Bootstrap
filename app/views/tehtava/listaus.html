@@ -4,11 +4,9 @@
 {% block content %}
 
 
-{% if user_logged_in %}
+
 <h1>Käyttäjän {{user_logged_in.etunimi}} muistilista</h1>
-{% else %}
-<h1> Käyttäjän muistilista </h1>
-{% endif %}
+
 
 
 <div class="alert alert-success">
